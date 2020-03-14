@@ -1,5 +1,4 @@
 page-login {
-
   .toolbar-background,
   ion-navbar,
   ion-header {
@@ -13,7 +12,7 @@ page-login {
   }
 
   .social-login-toggle {
-    //display: none;
+    display: none;
   }
 
   .row {
@@ -52,15 +51,13 @@ page-login {
       border-bottom: 1px solid #fff;
       margin: auto;
       @include margin(auto, auto, auto, 5px);
-
     }
-
   }
 
   // Fullscreen centered image background
   .content {
     //background: var(--primary_color_dark) !important;
-    background: url('../assets/imgs/login-background.jpg');
+    background: url("../assets/imgs/login-background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -70,7 +67,6 @@ page-login {
 
     .item-inner {
       @include padding(null, 0px !important, null, null);
-
     }
 
     .label {
@@ -166,7 +162,8 @@ page-login {
     }
   }
 
-  .reset,.referral {
+  .reset,
+  .referral {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -188,7 +185,6 @@ page-login {
     }
 
     .item {
-
       .text-input::placeholder {
         color: #ddd;
       }
@@ -197,21 +193,19 @@ page-login {
         color: white;
       }
     }
-
-
   }
 
   .login-btn.button,
   .reset-btn.button,
   .signup-btn.button,
   .refferal-btn button {
-      box-shadow: none;
-      color: #000 !important;
-      border-radius: 2px;
-      background: white;
-      margin-bottom: 20px;
-      margin-top: 20px;
-      font-size: 15px;
-      font-weight: 700;
+    box-shadow: none;
+    color: #000 !important;
+    border-radius: 2px;
+    background: white;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 700;
   }
 }

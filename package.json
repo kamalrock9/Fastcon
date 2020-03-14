@@ -41,6 +41,7 @@
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "@types/lodash": "^4.14.62",
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "angular-tree-component": "^7.2.1",
     "com-sarriaroman-photoviewer": "^1.2.4",
     "com.razorpay.cordova": "^1.4.8",
