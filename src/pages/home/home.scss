@@ -1,0 +1,285 @@
+page-home {
+  .fade {
+    border-radius: 2px;
+  }
+
+  .basic {
+    .product-slider {
+      .item {
+        @include padding(null, null, null, 10px);
+      }
+    }
+  }
+  ion-slides {
+    height: auto;
+
+    .slide-zoom {
+      .banner_img {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .shien {
+    .shien-strip {
+      img {
+        width: 100%;
+      }
+    }
+    .shien-category {
+      .shien-category-item {
+        padding: 5px 16px;
+        font-size: 12px;
+        font-weight: 600;
+        .shien-img {
+          img {
+            padding: 10px;
+            border-radius: 50%;
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+    }
+    .shein-product-row {
+      @include padding(8px, null);
+      .shein-product-row-title {
+        @include padding(null, null, null, 8px);
+        font-weight: 600;
+      }
+      .shein-product-row-slider {
+        .swiper-container {
+          @include padding(null, null, null, 8px);
+        }
+      }
+    }
+    .shein-product-item {
+      div[text-start] {
+        display: flex;
+        flex-direction: column-reverse;
+        del {
+          color: #aeaeae;
+          font-size: 12px;
+          margin-bottom: 4px;
+        }
+        ins {
+          text-decoration: none;
+          font-weight: bold;
+          font-size: 13px;
+          color: var(--accent_color);
+          @include margin(8px, null, 2px, null);
+        }
+      }
+    }
+    .shein-single-banner {
+      @include padding(10px, null, null, null);
+      img-loader {
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .shein-double-banner.row {
+      .col {
+        padding: 0px 5px;
+      }
+    }
+    .shein-double-tilted-banner {
+      background: #f1b205;
+      margin-top: 10px;
+      .shein-double-tilted-banner-title {
+        padding-top: 16px;
+        font-weight: 800;
+        font-size: 2rem;
+      }
+      .col {
+        &:nth-of-type(1) {
+          @include padding(16px, 8px, 16px, 16px);
+        }
+        &:nth-of-type(2) {
+          @include padding(16px, 16px, 16px, 8px);
+        }
+        img-loader {
+          img {
+            transform: rotate(-2deg);
+          }
+        }
+        div[text-center] {
+          padding-top: 15px;
+          font-size: 10px;
+          text-transform: uppercase;
+          color: white;
+          span {
+            background: #222222;
+            padding: 5px 30px;
+          }
+        }
+      }
+    }
+    .shein-product-grid {
+      .shein-product-grid-title {
+        text-transform: uppercase;
+        font-weight: 900;
+        font-size: 16px;
+        @include margin(16px, null, 12px, null);
+      }
+      .row {
+        padding: 4px !important;
+        .col {
+          padding: 4px;
+        }
+      }
+    }
+  }
+
+  .koovs {
+    .koovs-main-banner {
+      .swiper-pagination {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+        @include padding(null, 4px, null, null);
+        .swiper-pagination-bullet {
+          width: 5px;
+          height: 5px;
+          margin: 0 2px;
+        }
+        .swiper-pagination-bullet-active {
+          width: 8px;
+          height: 8px;
+        }
+      }
+
+      .swiper-container {
+        .slide-zoom {
+          img {
+            object-fit: cover;
+          }
+        }
+      }
+    }
+    .koovs-category-slide {
+      @include padding(10px, null, null, null);
+      .swiper-container {
+        @include padding(null, null, null, 10px);
+        .koovs-category-slide-title {
+          font-size: 12px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+      }
+    }
+    .koovs-product-slider {
+      .koovs-product-slider-title {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 5px;
+        text-transform: uppercase;
+        @include margin(20px, 10px, 10px);
+        font-weight: 800;
+        align-items: center;
+        span:nth-of-type(2) {
+          height: 1px;
+          flex: 1;
+          background: #000;
+          margin: 0px 10px;
+        }
+      }
+      .swiper-container {
+        @include padding(null, null, null, 10px);
+        ion-slide {
+          border: 1px solid #aeaeae;
+          .koovs-product-slider-product-name {
+            font-size: 12px;
+            line-height: 16px;
+            text-transform: uppercase;
+            margin-top: 5px;
+          }
+          .koovs-product-slider-product-price {
+            font-size: 12px;
+            line-height: 16px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+    .koovs-single-banner {
+      margin-top: 15px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .nnnow {
+    .nnnow-main-banner {
+      .swiper-container {
+        overflow: visible;
+      }
+      .swiper-pagination {
+        bottom: -10px;
+      }
+    }
+
+    .nnnow-cat-title {
+      font-size: 20px;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-top: 28px;
+      margin-bottom: 15px;
+    }
+    .nnnow-cat-slider {
+      .nnnow-cat-slider-img {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        object-fit: cover;
+        border-radius: 100px;
+        @media screen and (max-width: 320px) {
+          width: 70px;
+          height: 70px;
+        }
+      }
+      .nnnow-cat-slider-title {
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        margin-top: 5px;
+      }
+    }
+
+    .nnnow-quick-links {
+      .nnnow-quick-links-title {
+        color: #000;
+        font-size: 18px;
+        font-weight: 800;
+        margin-top: 35px;
+        margin-bottom: 18px;
+      }
+      .nnnow-quick-links-list {
+        width: 95%;
+        margin: 0 auto;
+        .nnnow-quick-links-item {
+          text-transform: uppercase;
+          font-size: 13px;
+          border-left: 1px solid #aeaeae;
+          border-right: 1px solid #aeaeae;
+          border-bottom: 1px solid #aeaeae;
+          &:nth-of-type(1) {
+            border-top: 1px solid #aeaeae;
+          }
+        }
+      }
+    }
+    .nnnow-banner-title {
+      margin-top: 40px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .nnnow-banner-img {
+      margin-top: 15px;
+    }
+  }
+}

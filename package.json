@@ -1,0 +1,151 @@
+{
+  "name": "wooapp",
+  "version": "0.0.1",
+  "author": "Ionic Framework",
+  "homepage": "http://ionicframework.com/",
+  "private": true,
+  "scripts": {
+    "start": "ionic-app-scripts serve",
+    "clean": "ionic-app-scripts clean",
+    "build": "ionic-app-scripts build",
+    "lint": "ionic-app-scripts lint"
+  },
+  "dependencies": {
+    "@angular/animations": "5.2.11",
+    "@angular/common": "5.2.11",
+    "@angular/compiler": "5.2.11",
+    "@angular/compiler-cli": "5.2.11",
+    "@angular/core": "5.2.11",
+    "@angular/forms": "5.2.11",
+    "@angular/platform-browser": "5.2.11",
+    "@angular/platform-browser-dynamic": "5.2.11",
+    "@ionic-native/android-permissions": "^4.20.0",
+    "@ionic-native/app-rate": "^4.20.0",
+    "@ionic-native/app-version": "^4.20.0",
+    "@ionic-native/core": "4.20.0",
+    "@ionic-native/deeplinks": "^4.20.0",
+    "@ionic-native/email-composer": "^4.20.0",
+    "@ionic-native/facebook": "^4.20.0",
+    "@ionic-native/file": "^4.20.0",
+    "@ionic-native/file-transfer": "^4.20.0",
+    "@ionic-native/google-analytics": "^4.20.0",
+    "@ionic-native/google-plus": "^4.20.0",
+    "@ionic-native/http": "^4.20.0",
+    "@ionic-native/in-app-browser": "^4.20.0",
+    "@ionic-native/onesignal": "^4.20.0",
+    "@ionic-native/photo-viewer": "^4.20.0",
+    "@ionic-native/social-sharing": "^4.20.0",
+    "@ionic-native/splash-screen": "4.20.0",
+    "@ionic-native/status-bar": "4.20.0",
+    "@ionic/storage": "2.2.0",
+    "@ngx-translate/core": "^9.1.1",
+    "@ngx-translate/http-loader": "^2.0.1",
+    "@types/lodash": "^4.14.62",
+    "angular-tree-component": "^7.2.1",
+    "com-sarriaroman-photoviewer": "^1.2.4",
+    "com.razorpay.cordova": "^1.4.8",
+    "cordova-android": "8.1.0",
+    "cordova-ios": "5.1.1",
+    "cordova-plugin-advanced-http": "^2.4.0",
+    "cordova-plugin-android-permissions": "^1.0.2",
+    "cordova-plugin-app-version": "^0.1.9",
+    "cordova-plugin-apprate": "^1.5.0",
+    "cordova-plugin-dialogs": "^2.0.2",
+    "cordova-plugin-email-composer": "^0.9.2",
+    "cordova-plugin-facebook4": "^6.2.0",
+    "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-file-transfer": "^1.7.1",
+    "cordova-plugin-google-analytics": "^1.8.6",
+    "cordova-plugin-googleplus": "^8.2.1",
+    "cordova-plugin-inappbrowser": "^3.2.0",
+    "cordova-plugin-ionic-webview": "^1.1.19",
+    "cordova-plugin-nativestorage": "^2.3.2",
+    "cordova-plugin-x-socialsharing": "^5.6.3",
+    "es6-promise-plugin": "^4.2.2",
+    "ionic-angular": "3.9.9",
+    "ionic-image-loader": "^6.3.3",
+    "ionic-plugin-deeplinks": "^1.0.20",
+    "ionic2-rating": "^1.2.2",
+    "ionicons": "3.0.0",
+    "moment": "^2.24.0",
+    "onesignal-cordova-plugin": "^2.8.3",
+    "rxjs": "5.5.11",
+    "sw-toolbox": "3.6.0",
+    "woocommerce-api": "^1.5.0",
+    "xcode": "^2.1.0",
+    "zone.js": "0.8.29"
+  },
+  "devDependencies": {
+    "@ionic/app-scripts": "3.2.4",
+    "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-ionic-keyboard": "^2.2.0",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "typescript": "2.6.2"
+  },
+  "description": "An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-android-permissions": {},
+      "cordova-plugin-apprate": {},
+      "cordova-plugin-app-version": {},
+      "cordova-plugin-email-composer": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
+      "cordova-plugin-file": {},
+      "cordova-plugin-file-transfer": {},
+      "cordova-plugin-google-analytics": {
+        "GMS_VERSION": "11.0.1"
+      },
+      "cordova-plugin-advanced-http": {
+        "OKHTTP_VERSION": "3.10.0"
+      },
+      "cordova-plugin-inappbrowser": {},
+      "onesignal-cordova-plugin": {},
+      "com-sarriaroman-photoviewer": {},
+      "cordova-plugin-x-socialsharing": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+      },
+      "cordova-plugin-facebook4": {
+        "APP_ID": "297281271110752",
+        "APP_NAME": "WooApp",
+        "FACEBOOK_HYBRID_APP_EVENTS": "false",
+        "FACEBOOK_ANDROID_SDK_VERSION": "5.5.2"
+      },
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.303250729052-1u11sp9liidpo0rqa4vi1ps01jenqc8q",
+        "PLAY_SERVICES_VERSION": "15.0.1"
+      },
+      "ionic-plugin-deeplinks": {
+        "URL_SCHEME": "wooapp",
+        "DEEPLINK_SCHEME": "https",
+        "DEEPLINK_HOST": "app.democontentphoeniixx.com",
+        "ANDROID_PATH_PREFIX": "/",
+        "ANDROID_2_PATH_PREFIX": "/",
+        "ANDROID_3_PATH_PREFIX": "/",
+        "ANDROID_4_PATH_PREFIX": "/",
+        "ANDROID_5_PATH_PREFIX": "/",
+        "DEEPLINK_2_SCHEME": " ",
+        "DEEPLINK_2_HOST": " ",
+        "DEEPLINK_3_SCHEME": " ",
+        "DEEPLINK_3_HOST": " ",
+        "DEEPLINK_4_SCHEME": " ",
+        "DEEPLINK_4_HOST": " ",
+        "DEEPLINK_5_SCHEME": " ",
+        "DEEPLINK_5_HOST": " "
+      },
+      "com.razorpay.cordova": {},
+      "cordova-plugin-ionic-webview": {}
+    },
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  }
+}

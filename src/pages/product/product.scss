@@ -1,0 +1,37 @@
+page-product {
+  .sorting {
+    border: 1px solid #ccc;
+
+    .col {
+      .button {
+        color: var(--primary_text_color) !important;
+      }
+    }
+  }
+
+  .loader_outer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .grid {
+    padding: 0px !important;
+
+    .row {
+      margin: 0px !important;
+      padding: 4px !important;
+    }
+
+    .col {
+      padding: 1px;
+    }
+  }
+}

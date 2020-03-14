@@ -1,0 +1,28 @@
+page-notification {
+  .content {
+    background: #f5f5f5;
+  }
+  .div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    .icon {
+      font-size: 4rem;
+    }
+  }
+
+  ion-item-sliding {
+    margin-bottom: 8px;
+  }
+
+  .notification-item {
+    .icon {
+      font-size: 3rem;
+    }
+    .label-md {
+      @include margin(8px, 8px, 8px, 0);
+    }
+  }
+}

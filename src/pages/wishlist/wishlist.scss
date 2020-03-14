@@ -1,0 +1,55 @@
+page-wishlist {
+  .div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    ion-icon {
+      display: inline-block;
+      font-size: 4rem;
+    }
+  }
+
+  .wishlist-product {
+    .wishlist-product-name-container {
+      display: flex;
+      margin-top: 10px;
+      .wishlist-product-name {
+        flex: 1;
+        font-size: 16px;
+        font-weight: 700;
+        @include margin(null, null, null, 5px);
+      }
+      .icon {
+        font-size: 30px;
+        position: absolute;
+        @include position(null,5px,null,null);
+      }
+    }
+    .price {
+      font-size: 14px;
+      @include margin(5px, 0px, 5px, 5px);
+    }
+    rating {
+      @include float(start);
+      @include margin(null, null, null, 5px);
+      ul {
+        padding: 0px;
+        margin: 0px;
+
+        &.rating li {
+          @include padding(0px !important, null, null, null);
+          @include padding(null, 2px !important, null, null);
+          @include padding(null, null, 0px !important, null);
+          @include padding(null, null, null, 0px !important);
+          background: none;
+          color: #ffb400;
+
+          ion-icon {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+}
