@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { LoadingController } from "ionic-angular";
-import { TranslateService } from "@ngx-translate/core";
+//import { TranslateService } from "@ngx-translate/core";
 
 @Injectable()
 export class LoadingProvider {
   load: any;
   constructor(
-    private loader: LoadingController,
-    private translate: TranslateService
-  ) {}
+    private loader: LoadingController
+  ) //private translate: TranslateService
+  {}
 
   async show(dismissOnPageChange = true) {
     console.log("here");
@@ -27,7 +27,7 @@ export class LoadingProvider {
                     </div>
                   </div>`,
       spinner: "hide",
-      dismissOnPageChange: dismissOnPageChange
+      dismissOnPageChange: dismissOnPageChange,
     });
 
     await this.load.present();
@@ -48,7 +48,7 @@ export class LoadingProvider {
                     </div>
                   </div>`,
       spinner: "hide",
-      dismissOnPageChange: false
+      dismissOnPageChange: false,
     });
     await this.load.present();
   }

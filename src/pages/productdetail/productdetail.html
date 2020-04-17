@@ -32,9 +32,14 @@
   </ng-container>
   <ng-container *ngIf="product">
     <ion-slides #slider pager class="header-image" [dir]="dir">
-      <ion-slide *ngFor="let x of product.images">
-        <img-loader [src]="x.src" (click)="zoomImage(x.src,x.name)" useImg></img-loader>
+      <ion-slide *ngFor="let x of product.extraImages">
+        <img-loader [src]="x.src" (click)="zoomImage(x.src,x.name)" useImg> </img-loader>
       </ion-slide>
+      <ng-container *ngFor="let x of product.images;let i=index">
+        <ion-slide *ngIf="i>0 || product.extraImages.length==0">
+          <img-loader [src]="x.src" (click)="zoomImage(x.src,x.name)" useImg> </img-loader>
+        </ion-slide>
+      </ng-container>
     </ion-slides>
     <ion-badge class="discount" *ngIf="product.on_sale">{{product | discount}}</ion-badge>
 
@@ -101,7 +106,7 @@
         <ion-list-header no-padding mode="md">
           {{'VARIATION' | translate}}
         </ion-list-header>
-        <ion-row>
+        <!--<ion-row>
           <ion-col col-12 no-padding *ngFor="let attribute of product.var_attributes;">
             <ion-item no-padding class="no-lines">
               <ion-label stacked></ion-label>
@@ -115,11 +120,46 @@
               </ion-select>
             </ion-item>
           </ion-col>
-        </ion-row>
+        </ion-row>-->
+
+        <div *ngFor="let attribute of product.var_attributes;" class="swatches-container-main">
+          <span class="swatches-title">{{attribute.name}}</span>
+          <div [ngSwitch]="attribute.options_type">
+            <ng-container *ngSwitchCase="'color'">
+              <ng-container *ngFor="let option of attribute.options">
+                <div
+                  [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.slug?option.slug:option))?'swatches-selected':''"
+                  class="swatches-container" tappable (tap)="onVariationChange(attribute.slug,option)">
+                  <span class="swatches" [ngStyle]="{'background-color':option.value}"></span>
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'image'">
+              <ng-container *ngFor="let option of attribute.options">
+                <div
+                  [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.slug?option.slug:option))?'swatches-selected':''"
+                  class="swatches-container swatches-container-img" tappable
+                  (tap)="onVariationChange(attribute.slug,option)">
+                  <img [src]="option.value" class="swatches" />
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <ng-container *ngFor="let option of attribute.options">
+                <div
+                  [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.slug?option.slug:option))?'swatches-selected':''"
+                  class="swatches-container" tappable (tap)="onVariationChange(attribute.slug,option)">
+                  <span class="swatches">{{option.value||option.name||option}}</span>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+
       </ion-list>
     </div>
 
-    <div padding-left padding-right class="single-product-section" *ngIf="product.grouped_products.length > 0">
+    <div padding-left padding-right class=" single-product-section" *ngIf="product.grouped_products.length > 0">
       <ion-list mode="md" class="grouped_products">
         <ion-list-header mode="md" no-padding>
           {{'GROUPED_PRODUCTS' | translate}}
