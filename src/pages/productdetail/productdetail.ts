@@ -338,6 +338,9 @@ export class ProductdetailPage {
   }
 
   onVariationChange(key, option) {
+    if (this.product.attr[key] == (option.slug ? option.slug : option)) {
+      return;
+    }
     this.product.attr = {
       ...this.product.attr,
       [key]: option.slug ? option.slug : option,
