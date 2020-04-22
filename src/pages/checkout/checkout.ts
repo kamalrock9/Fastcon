@@ -119,12 +119,12 @@ export class CheckoutPage {
             for (let i = 0; i < data.payment_gateway.length; i++) {
               if (
                 data.payment_gateway[i].gateway_id == "cod" ||
-                data.payment_gateway[i].gateway_id == "paytm" ||
+                //data.payment_gateway[i].gateway_id == "paytm" ||
                 data.payment_gateway[i].gateway_id == "bacs" ||
                 data.payment_gateway[i].gateway_id == "cheque" ||
-                data.payment_gateway[i].gateway_id == "razorpay" ||
-                data.payment_gateway[i].gateway_id == "instamojo" ||
-                data.payment_gateway[i].gateway_id == "pumcp" ||
+                //data.payment_gateway[i].gateway_id == "razorpay" ||
+                //data.payment_gateway[i].gateway_id == "instamojo" ||
+                //data.payment_gateway[i].gateway_id == "pumcp" ||
                 data.payment_gateway[i].gateway_id == "ccavenue" ||
                 data.payment_gateway[i].gateway_id == "wallet"
               ) {
