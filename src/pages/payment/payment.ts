@@ -1,19 +1,26 @@
-import { WooCommerceProvider } from './../../providers/woocommerce/woocommerce';
-import { LoadingProvider } from './../../providers/loading/loading';
-import { App } from './../../app/app.config';
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Navbar, Platform, IonicApp } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { SettingsProvider, ToastProvider } from '../../providers/providers';
-import { TranslateService } from '@ngx-translate/core';
+import { WooCommerceProvider } from "./../../providers/woocommerce/woocommerce";
+import { LoadingProvider } from "./../../providers/loading/loading";
+import { App } from "./../../app/app.config";
+import { Component, ViewChild } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  Navbar,
+  Platform,
+  IonicApp,
+} from "ionic-angular";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { SettingsProvider, ToastProvider } from "../../providers/providers";
+import { TranslateService } from "@ngx-translate/core";
 declare var RazorpayCheckout: any;
 
 @IonicPage({
-  priority: 'high'
+  priority: "high",
 })
 @Component({
-  selector: 'page-payment',
-  templateUrl: 'payment.html',
+  selector: "page-payment",
+  templateUrl: "payment.html",
 })
 export class PaymentPage {
   @ViewChild(Navbar) navBar: Navbar;
@@ -21,14 +28,25 @@ export class PaymentPage {
   isShoppingComplete: boolean = false;
   unregisterBackButtonAction: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private iab: InAppBrowser, private WC: WooCommerceProvider,
-    public settings: SettingsProvider, private platform: Platform, private loader: LoadingProvider, private toast: ToastProvider,
-    private translate: TranslateService, private ionicApp: IonicApp) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private iab: InAppBrowser,
+    private WC: WooCommerceProvider,
+    public settings: SettingsProvider,
+    private platform: Platform,
+    private loader: LoadingProvider,
+    private toast: ToastProvider,
+    private translate: TranslateService,
+    private ionicApp: IonicApp
+  ) {
     this.orderDetails = navParams.data.params;
     console.log(this.orderDetails);
-    if (this.orderDetails.payment_method == 'cod' ||
-      this.orderDetails.payment_method == 'bacs' ||
-      this.orderDetails.payment_method == 'cheque') {
+    if (
+      this.orderDetails.payment_method == "cod" ||
+      this.orderDetails.payment_method == "bacs" ||
+      this.orderDetails.payment_method == "cheque"
+    ) {
       this.isShoppingComplete = true;
     } else {
       this.payment();
@@ -37,109 +55,136 @@ export class PaymentPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PaymentPage');
+    console.log("ionViewDidLoad PaymentPage");
     this.initializeBackButtonCustomHandler();
     this.navBar.backButtonClick = (e: UIEvent) => {
       // todo something
       this.navCtrl.popToRoot();
-    }
+    };
   }
   ionViewWillLeave() {
     this.unregisterBackButtonAction && this.unregisterBackButtonAction();
   }
   initializeBackButtonCustomHandler(): void {
-    this.unregisterBackButtonAction = this.platform.registerBackButtonAction(() => {
-      let activePortal = this.ionicApp._loadingPortal.getActive() || this.ionicApp._modalPortal.getActive() ||
-        this.ionicApp._toastPortal.getActive() || this.ionicApp._overlayPortal.getActive();
-      if (!activePortal) {
-        this.navCtrl.popToRoot();
-      }
-    }, 1);
+    this.unregisterBackButtonAction = this.platform.registerBackButtonAction(
+      () => {
+        let activePortal =
+          this.ionicApp._loadingPortal.getActive() ||
+          this.ionicApp._modalPortal.getActive() ||
+          this.ionicApp._toastPortal.getActive() ||
+          this.ionicApp._overlayPortal.getActive();
+        if (!activePortal) {
+          this.navCtrl.popToRoot();
+        }
+      },
+      1
+    );
   }
 
   refreshPage(payment_id?) {
     this.loader.show();
     if (payment_id) {
-      this.WC.updateOrder(this.orderDetails.id, "processing", payment_id).then((res) => {
-        this.orderDetails = res;
-        this.loader.dismiss();
-      }, err => {
-        console.log(err);
-        this.toast.showError();
-        this.loader.dismiss();
-      });
+      this.WC.updateOrder(this.orderDetails.id, "processing", payment_id).then(
+        (res) => {
+          this.orderDetails = res;
+          this.loader.dismiss();
+        },
+        (err) => {
+          console.log(err);
+          this.toast.showError();
+          this.loader.dismiss();
+        }
+      );
     } else {
-      this.WC.getOrder(this.orderDetails.id).then((res) => {
-        this.orderDetails = res;
-        this.loader.dismiss();
-      }, err => {
-        console.log(err);
-        this.toast.showError();
-        this.loader.dismiss();
-      });
+      this.WC.getOrder(this.orderDetails.id).then(
+        (res) => {
+          this.orderDetails = res;
+          this.loader.dismiss();
+        },
+        (err) => {
+          console.log(err);
+          this.toast.showError();
+          this.loader.dismiss();
+        }
+      );
     }
-
   }
 
   goToHome() {
     this.navCtrl.popToRoot();
   }
   payment() {
-    if (this.orderDetails.status && this.orderDetails.status === 'failed') {
+    if (this.orderDetails.status && this.orderDetails.status === "failed") {
       return;
     }
-
-
 
     let payment_method = "?payment_method=" + this.orderDetails.payment_method;
     let order_id = "&ORDER_ID=" + this.orderDetails.id;
     let cus_id = "&CUST_ID=" + this.orderDetails.customer_id;
-    if (this.orderDetails.payment_method == 'razorpay') {
+    if (this.orderDetails.payment_method == "razorpay") {
       this.razorpayCheckout();
       return;
     }
-    this.translate.get(['PAYMENT_LOADING']).subscribe(x => {
+    this.translate.get(["PAYMENT_LOADING"]).subscribe((x) => {
       this.loader.showWithMessage(x.PAYMENT_LOADING);
     });
     let browser;
-    if (this.orderDetails.payment_method == 'wallet') {
-      browser = this.iab.create(App.url + "/wp-json/wc/v2/wallet/payment" + payment_method + order_id + cus_id,
-        "_self", { location: 'no', clearcache: 'yes', clearsessioncache: 'yes' });
+    if (this.orderDetails.payment_method == "wallet") {
+      browser = this.iab.create(
+        App.url +
+          "/wp-json/wc/v2/wallet/payment" +
+          payment_method +
+          order_id +
+          cus_id,
+        "_self",
+        { location: "no", clearcache: "yes", clearsessioncache: "yes" }
+      );
     } else {
-      browser = this.iab.create(App.url + "/wp-json/wc/v2/payment" + payment_method + order_id + cus_id,
-        "_self", { location: 'no', clearcache: 'yes', clearsessioncache: 'yes', hidden: 'yes' });
+      browser = this.iab.create(
+        App.url + "/wp-json/wc/v2/payment" + payment_method + order_id + cus_id,
+        "_self",
+        {
+          location: "no",
+          clearcache: "yes",
+          clearsessioncache: "yes",
+          hidden: "yes",
+        }
+      );
     }
-    browser.on("exit").subscribe(event => {
+    browser.on("exit").subscribe((event) => {
       console.log(event);
       this.refreshPage();
     });
     switch (this.orderDetails.payment_method) {
-      case 'paytm':
-        browser.on("loadstart").subscribe(event => {
-          if (event.url.includes('/order-received')) {
+      case "paytm":
+        browser.on("loadstart").subscribe((event) => {
+          if (event.url.includes("/order-received")) {
             browser.close();
           }
         });
-        browser.on("loadstop").subscribe(event => {
-          if (event.url.includes('paytm.com') || event.url.includes('paytm.in')) {
+        browser.on("loadstop").subscribe((event) => {
+          if (
+            event.url.includes("paytm.com") ||
+            event.url.includes("paytm.in")
+          ) {
             browser.show();
             this.loader.dismiss();
           }
         });
         break;
-      case 'wallet':
-        browser.on("loadstart").subscribe(event => {
+      case "wallet":
+        browser.on("loadstart").subscribe((event) => {
           this.loader.dismiss();
           console.log(event);
         });
-        browser.on("loadstop").subscribe(event => {
+        browser.on("loadstop").subscribe((event) => {
           browser.close();
         });
         break;
-      case 'pumcp':
+      case "pumcp":
         let openpumcp = false;
-        browser.on("loadstop").subscribe(event => {
-          if (event.url.includes('payu')) {
+        browser.on("loadstop").subscribe((event) => {
+          if (event.url.includes("payu")) {
             browser.show();
             openpumcp = true;
             this.loader.dismiss();
@@ -149,15 +194,15 @@ export class PaymentPage {
           }
         });
         break;
-      case 'instamojo':
+      case "instamojo":
         browser.show();
         this.loader.dismiss();
-        browser.on("loadstart").subscribe(event => {
+        browser.on("loadstart").subscribe((event) => {
           if (event.url.includes("/order-received")) {
             browser.close();
           }
         });
-        ''
+        "";
         // browser.on("loadstop").subscribe(event => {
         //   if (event.url.includes('payu')) {
         //     browser.show();
@@ -166,16 +211,31 @@ export class PaymentPage {
         //   }
         // });
         break;
-      case 'paypal':
+      case "ccavenue":
+        let openccavenue = false;
+        this.loader.dismiss();
+        browser.show();
+        browser.on("loadstop").subscribe((event) => {
+          if (event.url.includes("ccavenue")) {
+            openccavenue = true;
+          }
+          browser.on("loadstart").subscribe((event) => {
+            if (event.url.includes(App.url) && openccavenue) {
+              browser.close();
+            }
+          });
+        });
+        break;
+      case "paypal":
         //browser.show();
-        browser.on("loadstart").subscribe(event => {
-          if (event.url.includes('/order-received')) {
+        browser.on("loadstart").subscribe((event) => {
+          if (event.url.includes("/order-received")) {
             browser.close();
           }
         });
-        browser.on("loadstop").subscribe(event => {
-          if (event.url.includes('/order-pay')) {
-            browser.show()
+        browser.on("loadstop").subscribe((event) => {
+          if (event.url.includes("/order-pay")) {
+            browser.show();
             this.loader.dismiss();
           }
         });
@@ -184,25 +244,28 @@ export class PaymentPage {
   }
   razorpayCheckout() {
     let options = {
-      description: 'Order  ' + this.orderDetails.id,
-      image: '',
+      description: "Order  " + this.orderDetails.id,
+      image: "",
       currency: this.orderDetails.currency,
-      key: 'rzp_live_Mw6y1rFt9AqPGr',
+      key: "rzp_live_Mw6y1rFt9AqPGr",
       amount: parseFloat(this.orderDetails.total) * 100,
       name: App.store,
       prefill: {
-        email: this.orderDetails.billing.email || '',
-        contact: this.orderDetails.billing.phone || '',
-        name: this.orderDetails.billing.first_name + ' ' + this.orderDetails.billing.last_name
+        email: this.orderDetails.billing.email || "",
+        contact: this.orderDetails.billing.phone || "",
+        name:
+          this.orderDetails.billing.first_name +
+          " " +
+          this.orderDetails.billing.last_name,
       },
       theme: {
-        color: this.settings.all.appSettings.primary_color
+        color: this.settings.all.appSettings.primary_color,
       },
       modal: {
         ondismiss: function () {
-          alert('Payment Cancelled');
-        }
-      }
+          alert("Payment Cancelled");
+        },
+      },
     };
 
     //Below are js code which is not working
@@ -217,15 +280,21 @@ export class PaymentPage {
     };*/
 
     //Working ported typescript
-    RazorpayCheckout.open(options, (payment_id) => {
-      //alert('payment_id: ' + payment_id);
-      this.refreshPage(payment_id);
-    }, (error) => {
-      //alert(error.description + ' (Error ' + error.code + ')');
-      this.refreshPage();
-    });
+    RazorpayCheckout.open(
+      options,
+      (payment_id) => {
+        //alert('payment_id: ' + payment_id);
+        this.refreshPage(payment_id);
+      },
+      (error) => {
+        //alert(error.description + ' (Error ' + error.code + ')');
+        this.refreshPage();
+      }
+    );
   }
   calculatePrice(x) {
-    return (x.prices_include_tax ? x.total : (Number(x.total) + Number(x.total_tax)).toFixed(2));
+    return x.prices_include_tax
+      ? x.total
+      : (Number(x.total) + Number(x.total_tax)).toFixed(2);
   }
 }

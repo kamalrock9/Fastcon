@@ -4,7 +4,7 @@ import {
   LoadingProvider,
   WooCommerceProvider,
   ToastProvider,
-  RestProvider
+  RestProvider,
 } from "./../../providers/providers";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component, NgZone, ViewChild } from "@angular/core";
@@ -13,16 +13,16 @@ import {
   NavController,
   NavParams,
   Events,
-  Content
+  Content,
 } from "ionic-angular";
 import { TranslateService } from "@ngx-translate/core";
 
 @IonicPage({
-  priority: "high"
+  priority: "high",
 })
 @Component({
   selector: "page-checkout",
-  templateUrl: "checkout.html"
+  templateUrl: "checkout.html",
 })
 export class CheckoutPage {
   @ViewChild(Content) content: Content;
@@ -58,7 +58,7 @@ export class CheckoutPage {
     this.formBilling = this.formBuilder.group({
       first_name: [
         this.billingData.first_name || this.user.first_name,
-        Validators.required
+        Validators.required,
       ],
       last_name: [this.billingData.last_name || this.user.last_name],
       company: [this.billingData.company],
@@ -68,17 +68,17 @@ export class CheckoutPage {
       state: [this.billingData.state],
       postcode: [
         this.billingData.postcode || settings.postcode,
-        Validators.required
+        Validators.required,
       ],
       address_1: [this.billingData.address_1, Validators.required],
       address_2: [this.billingData.address_2],
-      country: [this.billingData.country || "IN", Validators.required]
+      country: [this.billingData.country || "IN", Validators.required],
     });
 
     this.formShipping = this.formBuilder.group({
       first_name: [
         this.shippingData.first_name || this.user.first_name,
-        Validators.required
+        Validators.required,
       ],
       last_name: [this.shippingData.last_name || this.user.last_name],
       company: [this.shippingData.company],
@@ -86,11 +86,11 @@ export class CheckoutPage {
       state: [this.shippingData.state],
       postcode: [
         this.shippingData.postcode || settings.postcode,
-        Validators.required
+        Validators.required,
       ],
       address_1: [this.shippingData.address_1, Validators.required],
       address_2: [this.shippingData.address_2],
-      country: [this.shippingData.country || "IN", Validators.required]
+      country: [this.shippingData.country || "IN", Validators.required],
     });
 
     this.countries = this.settings.countryList;
@@ -125,7 +125,7 @@ export class CheckoutPage {
                 data.payment_gateway[i].gateway_id == "razorpay" ||
                 data.payment_gateway[i].gateway_id == "instamojo" ||
                 data.payment_gateway[i].gateway_id == "pumcp" ||
-                //data.payment_gateway[i].gateway_id == "ccavenue" ||
+                data.payment_gateway[i].gateway_id == "ccavenue" ||
                 data.payment_gateway[i].gateway_id == "wallet"
               ) {
                 payment.push(data.payment_gateway[i]);
@@ -140,7 +140,7 @@ export class CheckoutPage {
           });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
@@ -168,7 +168,7 @@ export class CheckoutPage {
       (this.billingStates.length > 0 &&
         this.formBilling.get("state").value == "")
     ) {
-      this.translate.get(["FILL_REQUIRED_FIELD"]).subscribe(x => {
+      this.translate.get(["FILL_REQUIRED_FIELD"]).subscribe((x) => {
         this.toast.show(x.FILL_REQUIRED_FIELD);
       });
       return;
@@ -190,7 +190,7 @@ export class CheckoutPage {
         (this.shippingStates.length > 0 &&
           this.formShipping.get("state").value == ""))
     ) {
-      this.translate.get(["FILL_REQUIRED_FIELD"]).subscribe(x => {
+      this.translate.get(["FILL_REQUIRED_FIELD"]).subscribe((x) => {
         this.toast.show(x.FILL_REQUIRED_FIELD);
       });
       return;
@@ -208,12 +208,12 @@ export class CheckoutPage {
             this.finalShippingSubmit();
           } else {
             this.loader.dismiss();
-            this.translate.get(["DELIVERY_NOT_AVAILABLE"]).subscribe(x => {
+            this.translate.get(["DELIVERY_NOT_AVAILABLE"]).subscribe((x) => {
               this.toast.show(x.DELIVERY_NOT_AVAILABLE);
             });
           }
         },
-        err => {
+        (err) => {
           console.log(err);
           this.loader.dismiss();
           this.toast.showError();
@@ -232,13 +232,13 @@ export class CheckoutPage {
       data.shipping = this.formShipping.value;
     }
     this.WC.updateUserInfo(this.user.id, data).then(
-      res => {
+      (res) => {
         console.log(res);
         this.loader.dismiss();
         this.user.loggedIn(res);
         this.goToReview();
       },
-      err => {
+      (err) => {
         this.loader.dismiss();
         console.error(err);
       }
@@ -280,7 +280,7 @@ export class CheckoutPage {
       !this.reviewData.chosen_gateway ||
       this.reviewData.chosen_gateway === ""
     ) {
-      this.translate.get(["SELECT_PAYMENT_METHOD"]).subscribe(x => {
+      this.translate.get(["SELECT_PAYMENT_METHOD"]).subscribe((x) => {
         this.toast.show(x.SELECT_PAYMENT_METHOD);
       });
       return;
@@ -323,7 +323,7 @@ export class CheckoutPage {
           this.navCtrl.push("PaymentPage", { params: data });
           this.loader.dismiss();
         },
-        err => {
+        (err) => {
           this.loader.dismiss();
           console.log(err);
         }
@@ -331,7 +331,7 @@ export class CheckoutPage {
   }
   shipping_price() {
     return this.reviewData.shipping_method.find(
-      x => x.id == this.reviewData.chosen_shipping_method
+      (x) => x.id == this.reviewData.chosen_shipping_method
     ).shipping_method_price;
   }
 }
