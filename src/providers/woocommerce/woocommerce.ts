@@ -1,7 +1,6 @@
 import { SettingsProvider } from "./../settings/settings";
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
-import * as WC from "woocommerce-api";
 import { App } from "../../app/app.config";
 import { HttpClient } from "@angular/common/http";
 import "rxjs/add/operator/map";
@@ -30,7 +29,7 @@ export class WooCommerceProvider {
       wpAPI: true, //or false if you want to use the legacy API v3
       version: "wc/v2", //or wc/v1
       //verifySsl: true,
-      queryStringAuth: true
+      queryStringAuth: true,
     });
     return this.WooCommerce;
   }
@@ -52,7 +51,7 @@ export class WooCommerceProvider {
   }
   getSubCategories(c: any) {
     //: Promise<any> {
-    return this.WooCommerce.get("products/categories?parent=" + c).then(x => {
+    return this.WooCommerce.get("products/categories?parent=" + c).then((x) => {
       //console.log(x.data);
       return x.data;
     });
@@ -60,12 +59,12 @@ export class WooCommerceProvider {
 
   loadSetting() {
     return this.WooCommerce.get("system_status").then(
-      x => {
+      (x) => {
         console.log(x);
         this.temp.setSettings(x.data.settings, "settings");
         return x.data.settings;
       },
-      err => {
+      (err) => {
         console.log(err);
       }
     );
@@ -146,7 +145,7 @@ export class WooCommerceProvider {
   getAttributeTerms(id: number) {
     return this.WooCommerce.get(
       "products/attributes/" + id + "/terms?hide_empty=true"
-    ).then(x => {
+    ).then((x) => {
       // console.log(x.data);
       return x.data;
     });
@@ -155,17 +154,19 @@ export class WooCommerceProvider {
   getAttributes() {
     //: Promise<any> {
 
-    return this.WooCommerce.get("products/attributes").then(x => {
+    return this.WooCommerce.get("products/attributes").then((x) => {
       // console.log(x.data);
       return x.data;
     });
   }
   getProductAttributes(id?: number) {
     let i = id ? "?id=" + id : "";
-    return this.WooCommerce.get("products/product-attributes/" + i).then(x => {
-      // console.log(x.data);
-      return x.data;
-    });
+    return this.WooCommerce.get("products/product-attributes/" + i).then(
+      (x) => {
+        // console.log(x.data);
+        return x.data;
+      }
+    );
   }
   getCustomAttributes(product?) {
     let p = product ? "&product=" + product : "";
@@ -181,43 +182,45 @@ export class WooCommerceProvider {
   getOrders(id: number, page: number, per_page: number) {
     let p = page ? "&page=" + page : "";
     let pp = per_page ? "&per_page=" + per_page : "&per_page=10";
-    return this.WooCommerce.get("orders?customer=" + id + p + pp).then(data => {
-      return data.data;
-    });
+    return this.WooCommerce.get("orders?customer=" + id + p + pp).then(
+      (data) => {
+        return data.data;
+      }
+    );
   }
   updateOrder(id, status, transaction_id?) {
     var data = {
       status: status,
-      transaction_id: transaction_id || ""
+      transaction_id: transaction_id || "",
     };
-    return this.WooCommerce.put("orders/" + id, data).then(data => {
+    return this.WooCommerce.put("orders/" + id, data).then((data) => {
       return data.data;
     });
   }
   getOrder(order_id: number) {
-    return this.WooCommerce.get("orders/" + order_id).then(data => {
+    return this.WooCommerce.get("orders/" + order_id).then((data) => {
       return data.data;
     });
   }
   getDownloads(id: number) {
-    return this.WooCommerce.get("customers/" + id + "/downloads").then(x => {
+    return this.WooCommerce.get("customers/" + id + "/downloads").then((x) => {
       // console.log(x.data);
       return x.data;
     });
   }
   getUserInfo(id: number) {
-    return this.WooCommerce.get("customers/" + id).then(x => {
+    return this.WooCommerce.get("customers/" + id).then((x) => {
       // console.log(x.data);
       return x.data;
     });
   }
   updateUserInfo(id: number, data) {
-    return this.WooCommerce.post("customers/" + id, data).then(x => {
+    return this.WooCommerce.post("customers/" + id, data).then((x) => {
       return x.data;
     });
   }
   createOrder(data) {
-    return this.WooCommerce.post("orders", data).then(x => {
+    return this.WooCommerce.post("orders", data).then((x) => {
       return x.data;
     });
   }
@@ -238,7 +241,7 @@ export class WooCommerceProvider {
   }
 
   getCoupons() {
-    return this.WooCommerce.get("coupons").then(x => {
+    return this.WooCommerce.get("coupons").then((x) => {
       return x.data;
     });
   }
@@ -248,7 +251,7 @@ export class WooCommerceProvider {
 
     return this.http
       .get(this.RestURL + "product/review-settings" + p_id + u_id)
-      .subscribe(x => {
+      .subscribe((x) => {
         this.temp.setSettings(x, "reviewSettings");
         return x;
       });
@@ -261,11 +264,11 @@ export class WooCommerceProvider {
       wpAPI: true, //or false if you want to use the legacy API v3
       version: "wc/v3", //or wc/v1
       //verifySsl: true,
-      queryStringAuth: true
+      queryStringAuth: true,
     });
     let p = id ? "?product=" + id : "";
     let s = "&status=" + status;
-    return WCv3.get("products/reviews" + p + s).then(x => {
+    return WCv3.get("products/reviews" + p + s).then((x) => {
       console.log(x.data);
       return x.data;
     });
@@ -278,10 +281,10 @@ export class WooCommerceProvider {
       wpAPI: true, //or false if you want to use the legacy API v3
       version: "wc/v3", //or wc/v1
       //verifySsl: true,
-      queryStringAuth: true
+      queryStringAuth: true,
     });
 
-    return WCv3.post("products/reviews", data).then(x => {
+    return WCv3.post("products/reviews", data).then((x) => {
       return x.data;
     });
   }
