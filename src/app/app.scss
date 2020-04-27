@@ -237,7 +237,10 @@ h6 {
     direction: rtl;
   }
 
-  tree-root .angular-tree-component-rtl .toggle-children-wrapper-collapsed .toggle-children {
+  tree-root
+    .angular-tree-component-rtl
+    .toggle-children-wrapper-collapsed
+    .toggle-children {
     transform: rotate(180deg) !important;
   }
 
@@ -347,7 +350,11 @@ h6 {
     overflow: hidden;
     word-wrap: break-word;
     letter-spacing: 1px;
-    background: linear-gradient(to bottom, rgba(175, 175, 175, 0.37) 0%, rgba(0, 0, 0, 1) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(175, 175, 175, 0.37) 0%,
+      rgba(0, 0, 0, 1) 100%
+    );
     width: 100%;
     padding: 4px 0 2px 0;
     margin: 0;
