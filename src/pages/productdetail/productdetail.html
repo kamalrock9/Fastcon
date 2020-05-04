@@ -1,4 +1,5 @@
 <ion-header>
+
   <ion-navbar>
     <ion-title>
       <span [innerHTML]="product ? product.name :'Loading Product'"></span>
@@ -8,43 +9,29 @@
         <ion-icon name="md-search"></ion-icon>
       </button>
       <button mode="md" ion-button icon-only (click)="goTo('WishlistPage')">
-        <ion-badge *ngIf="wishlist.total && wishlist.total > 0"
-          >{{wishlist.total}}</ion-badge
-        >
+        <ion-badge *ngIf="wishlist.total && wishlist.total > 0">{{wishlist.total}}</ion-badge>
         <ion-icon name="md-heart"></ion-icon>
       </button>
       <button mode="md" ion-button clear icon-only (click)="goTo('CartPage')">
-        <ion-badge *ngIf="settings.all && settings.cartCount > 0"
-          >{{settings.cartCount}}</ion-badge
-        >
+        <ion-badge *ngIf="settings.all && settings.cartCount > 0">{{settings.cartCount}}</ion-badge>
         <ion-icon name="md-cart"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
+
 <ion-content>
   <ng-container *ngIf="!product">
     <skeleton-item no-animated height="100vw" margin></skeleton-item>
     <skeleton-item no-animated height="25px" width="80%" margin></skeleton-item>
     <skeleton-item no-animated height="14px" width="60%" margin></skeleton-item>
-    <skeleton-item
-      no-animated
-      height="50px"
-      width="100%"
-      margin
-    ></skeleton-item>
+    <skeleton-item no-animated height="50px" width="100%" margin></skeleton-item>
     <skeleton-item no-animated height="12px" width="40%" margin></skeleton-item>
     <skeleton-item no-animated height="12px" width="20%" margin></skeleton-item>
   </ng-container>
   <ng-container *ngIf="product">
     <ion-slides #slider pager class="header-image" [dir]="dir">
-      <ion-slide *ngFor="let x of product.images">
-        <img-loader
-          [src]="x.src"
-          (click)="zoomImage(x.src,x.name)"
-          useImg
-        ></img-loader>
       <ion-slide *ngFor="let x of product.extraImages">
         <img-loader [src]="x.src" (click)="zoomImage(x.src,x.name)" useImg> </img-loader>
       </ion-slide>
@@ -54,9 +41,7 @@
         </ion-slide>
       </ng-container>
     </ion-slides>
-    <ion-badge class="discount" *ngIf="product.on_sale"
-      >{{product | discount}}</ion-badge
-    >
+    <ion-badge class="discount" *ngIf="product.on_sale">{{product | discount}}</ion-badge>
 
     <div padding-left padding-right class="single-product-section">
       <ion-row no-padding align-items-center>
@@ -64,28 +49,17 @@
           <h3 item-start [innerHTML]="product.name"></h3>
         </ion-col>
         <ion-col col-auto no-padding>
-          <button
-            item-end
-            ion-button
-            icon-only
-            clear
-            tappable
-            (click)="share(product)"
-            color="dark"
-          >
+          <button item-end ion-button icon-only clear tappable (click)="share(product)" color="dark">
             <ion-icon no-padding name="md-share"></ion-icon>
           </button>
         </ion-col>
       </ion-row>
 
       <!--Short Description-->
-      <!-- <div
-        class="product_shot_desc"
-        [innerHTML]="product.short_description"
-      ></div> -->
+      <div class="product_shot_desc" [innerHTML]="product.short_description"></div>
       <!--Product price and stock availability-->
       <div class="price_n_stock">
-        <h5 [innerHTML]="product.price_html"></h5>
+        <h5 [innerHTML]='product.price_html'> </h5>
         <span [class]="product.in_stock?'in-stock':'out-stock'"></span>
       </div>
 
@@ -100,32 +74,17 @@
       Darkar 24 chhungin kan deliver thei
     </div> -->
 
+
       <!--Quantity-->
-      <div
-        class="product_quantity"
-        no-padding
-        no-lines
-        *ngIf="!product.sold_individually && (product.type=='simple' || product.type=='variable')"
-      >
+      <div class="product_quantity" no-padding no-lines
+        *ngIf="!product.sold_individually && (product.type=='simple' || product.type=='variable')">
         <p>{{'QUANTITY' | translate}}</p>
         <div class="center">
-          <button
-            ion-button
-            icon-only
-            clear
-            color="dark"
-            (click)="decreaseQuantity()"
-          >
+          <button ion-button icon-only clear color="dark" (click)="decreaseQuantity()">
             <ion-icon name="remove" color="light"></ion-icon>
           </button>
           <span class="border">{{product.quantity}}</span>
-          <button
-            ion-button
-            icon-only
-            clear
-            color="dark"
-            (click)="increaseQuantity()"
-          >
+          <button ion-button icon-only clear color="dark" (click)="increaseQuantity()">
             <ion-icon name="add"></ion-icon>
           </button>
         </div>
@@ -133,61 +92,31 @@
     </div>
     <div padding-left padding-right class="single-product-section">
       <div class="product_rating">
-        <rating
-          *ngIf="product.average_rating"
-          item-start
-          max="5"
-          readOnly="true"
-          [(ngModel)]="product.average_rating"
-          class="rating"
-        >
+        <rating *ngIf="product.average_rating" item-start max="5" readOnly="true" [(ngModel)]="product.average_rating"
+          class="rating">
         </rating>
         ({{product.rating_count || 0}})
-        <span tappable (click)="goTo('ReviewsPage',product)" class="review"
-          >{{"SEE_ALL_REVIEWS" | translate}}</span
-        >
+        <span tappable (click)="goTo('ReviewsPage',product)" class="review">{{"SEE_ALL_REVIEWS" | translate}}</span>
       </div>
     </div>
 
-    <div
-      padding-left
-      padding-right
-      class="single-product-section"
-      *ngIf="product.variations.length > 0 && product.attributes.length > 0"
-    >
+    <div padding-left padding-right class="single-product-section"
+      *ngIf="product.variations.length > 0 && product.attributes.length > 0">
       <ion-list mode="md">
         <ion-list-header no-padding mode="md">
           {{'VARIATION' | translate}}
         </ion-list-header>
-        <ion-row>
-          <ion-col
-            col-12
-            no-padding
-            *ngFor="let attribute of product.var_attributes;"
-          >
         <!--<ion-row>
           <ion-col col-12 no-padding *ngFor="let attribute of product.var_attributes;">
             <ion-item no-padding class="no-lines">
               <ion-label stacked></ion-label>
-              <ion-select
-                [(ngModel)]="product.attr[attribute.slug]"
-                let
-                i="index"
-                interface="popover"
-                (ionChange)="onChange()"
-                [placeholder]="attribute.name"
-                [selectOptions]="{cssClass:'full-popup'}"
-              >
+              <ion-select [(ngModel)]="product.attr[attribute.slug]" let i=index interface="popover"
+                (ionChange)="onChange()" [placeholder]="attribute.name" [selectOptions]="{cssClass:'full-popup'}">
                 <ng-container *ngFor="let option of attribute.options">
-                  <ion-option
-                    [value]="option.slug"
-                    *ngIf="option && option.slug"
-                    >{{option.name}}</ion-option
-                  >
-                  <ion-option [value]="option" *ngIf="option && !option.slug"
-                    >{{option}}</ion-option
-                  >
+                  <ion-option [value]="option.slug" *ngIf='option && option.slug'>{{option.name}}</ion-option>
+                  <ion-option [value]="option" *ngIf='option && !option.slug'>{{option}}</ion-option>
                 </ng-container>
+
               </ion-select>
             </ion-item>
           </ion-col>
@@ -230,67 +159,30 @@
       </ion-list>
     </div>
 
-    <div
-      padding-left
-      padding-right
-      class="single-product-section"
-      *ngIf="product.grouped_products.length > 0"
-    >
     <div padding-left padding-right class=" single-product-section" *ngIf="product.grouped_products.length > 0">
       <ion-list mode="md" class="grouped_products">
         <ion-list-header mode="md" no-padding>
           {{'GROUPED_PRODUCTS' | translate}}
         </ion-list-header>
-        <ng-container
-          *ngFor="let groupItems of product.grouped_products; let i = index"
-        >
-          <ion-item
-            no-padding
-            *ngIf="groupItems.sold_individually && groupItems.type!=='variable'"
-          >
-            <ion-label [innerHTML]="groupItems.name"> </ion-label>
-            <ion-checkbox
-              (ionChange)="onCheckChange($event,groupItems)"
-              item-end
-            ></ion-checkbox>
+        <ng-container *ngFor="let groupItems of product.grouped_products; let i = index">
+          <ion-item no-padding *ngIf="groupItems.sold_individually && groupItems.type!=='variable'">
+            <ion-label [innerHTML]="groupItems.name">
+            </ion-label>
+            <ion-checkbox (ionChange)="onCheckChange($event,groupItems)" item-end></ion-checkbox>
           </ion-item>
-          <ion-item
-            no-padding
-            *ngIf="!groupItems.sold_individually && groupItems.type!=='variable'"
-          >
+          <ion-item no-padding *ngIf="!groupItems.sold_individually && groupItems.type!=='variable'">
             <ion-label [innerHTML]="groupItems.name"></ion-label>
             <div item-end class="center">
-              <button
-                margin-end
-                ion-button
-                icon-only
-                clear
-                color="dark"
-                (tap)="decreaseQuantity(i)"
-              >
+              <button margin-end ion-button icon-only clear color="dark" (tap)="decreaseQuantity(i)">
                 <ion-icon name="remove"></ion-icon>
               </button>
-              <span
-                class="border"
-                [innerHtml]="groupItems.quantity || 0"
-              ></span>
-              <button
-                margin-start
-                ion-button
-                icon-only
-                clear
-                color="dark"
-                (tap)="increaseQuantity(i)"
-              >
+              <span class="border" [innerHtml]="groupItems.quantity || 0"></span>
+              <button margin-start ion-button icon-only clear color="dark" (tap)="increaseQuantity(i)">
                 <ion-icon name="add"></ion-icon>
               </button>
             </div>
           </ion-item>
-          <ion-item
-            no-padding
-            *ngIf="groupItems.type==='variable'"
-            (tap)="goTo('ProductdetailPage',groupItems)"
-          >
+          <ion-item no-padding *ngIf="groupItems.type==='variable'" (tap)="goTo('ProductdetailPage',groupItems)">
             <ion-label [innerHTML]="groupItems.name"></ion-label>
             <div item-end>
               <u> {{'SELECT_OPTIONS' | translate}} </u>
@@ -300,12 +192,7 @@
       </ion-list>
     </div>
 
-    <div
-      padding-left
-      padding-right
-      class="single-product-section"
-      *ngIf="this.settings.all.appSettings.pincode_active"
-    >
+    <div padding-left padding-right class="single-product-section" *ngIf="this.settings.all.appSettings.pincode_active">
       <ion-list class="delivery_option" no-lines mode="md" no-padding>
         <ion-list-header mode="md" no-padding>
           {{'DELIVERY_OPTIONS' | translate}}
@@ -314,56 +201,30 @@
           <ion-label stacked>
             {{'ENTER_POSTCODE' | translate}}
           </ion-label>
-          <ion-input
-            type="number"
-            [(ngModel)]="newPostCode"
-            clearInput
-            [dir]="dir"
-          ></ion-input>
-          <button
-            ion-button
-            clear
-            item-end
-            class="accent"
-            tappable
-            (click)="submitPincodeCheck(newPostCode)"
-          >
-            Apply
-          </button>
+          <ion-input type="number" [(ngModel)]="newPostCode" clearInput [dir]='dir'></ion-input>
+          <button ion-button clear item-end class="accent" tappable
+            (click)="submitPincodeCheck(newPostCode)">Apply</button>
         </ion-item>
         <ion-item *ngIf="!postcodeEnter" no-padding>
-          <div class="delivery_availablity" *ngIf="!deliveryDetails.delivery">
-            Delivery not available at - &nbsp; <span>{{postcode}} </span>
-          </div>
-          <div class="delivery_availablity" *ngIf="deliveryDetails.delivery">
-            Delivery available at - &nbsp; <span>{{postcode}} </span>
-          </div>
-          <button
-            ion-button
-            icon-only
-            item-end
-            clear
-            class="accent"
-            tappable
-            (click)="submitPincodeCheck()"
-          >
+          <div class="delivery_availablity" *ngIf="!deliveryDetails.delivery">Delivery not available at - &nbsp;
+            <span>{{postcode}}
+            </span></div>
+          <div class="delivery_availablity" *ngIf="deliveryDetails.delivery">Delivery available at - &nbsp;
+            <span>{{postcode}}
+            </span></div>
+          <button ion-button icon-only item-end clear class="accent" tappable (click)="submitPincodeCheck()">
             {{'CHANGE' | translate}}
           </button>
         </ion-item>
 
-        <ion-row
-          *ngIf="!postcodeEnter && postcode && deliveryDetails.delivery"
-          no-padding
-        >
+        <ion-row *ngIf="!postcodeEnter && postcode && deliveryDetails.delivery" no-padding>
           <ion-col col-4 no-padding>
             <div>
               <p>
                 <ion-icon name="ios-compass-outline"></ion-icon>
               </p>
               <p>{{'LOCATION' | translate}}</p>
-              <p
-                [innerHTML]="deliveryDetails.state+', '+deliveryDetails.city"
-              ></p>
+              <p [innerHTML]="deliveryDetails.state+', '+deliveryDetails.city"></p>
             </div>
           </ion-col>
           <ion-col col-4 no-padding>
@@ -397,10 +258,7 @@
           <ion-row no-padding>
             <ion-col col-4 no-padding>{{'CATEGORY' | translate}}</ion-col>
             <ion-col col-8 no-padding>
-              <span
-                *ngFor="let cat of product.categories"
-                [innerHTML]="cat.name"
-              ></span>
+              <span *ngFor="let cat of product.categories" [innerHTML]="cat.name"></span>
             </ion-col>
           </ion-row>
           <ion-row no-padding *ngIf="product.total_sales">
@@ -415,10 +273,7 @@
               {{product.sku}}
             </ion-col>
           </ion-row>
-          <ion-row
-            no-padding
-            *ngIf="product.stock_quantity && product.in_stock"
-          >
+          <ion-row no-padding *ngIf="product.stock_quantity && product.in_stock">
             <ion-col col-4 no-padding>{{'STOCK' | translate}}</ion-col>
             <ion-col col-8 no-padding>
               {{product.stock_quantity}}
@@ -443,12 +298,8 @@
       </ion-list>
     </div>
 
-    <div
-      padding-left
-      padding-right
-      class="single-product-section"
-      *ngIf="product.description"
-    >
+
+    <div padding-left padding-right class="single-product-section" *ngIf="product.description">
       <ion-list no-lines mode="md" no-padding>
         <ion-list-header mode="md" no-padding>
           {{'DESCRIPTION' | translate}}
@@ -459,28 +310,15 @@
       </ion-list>
     </div>
 
-    <div
-      class="product-slider single-product-section"
-      *ngIf="product.upsell_ids.length>0 && product.upsell"
-    >
+    <div class="product-slider single-product-section" *ngIf="product.upsell_ids.length>0 && product.upsell">
       <ion-list-header no-lines mode="md">
         {{'UPSELL' | translate}}
       </ion-list-header>
       <ion-slides spaceBetween="8" [slidesPerView]="slidesPerView" [dir]="dir">
         <ion-slide *ngFor="let y of product.upsell">
           <div class="product-item">
-            <button
-              class="fav"
-              tappable
-              (click)="setFav(y)"
-              ion-button
-              clear
-              icon-only
-            >
-              <ion-icon
-                no-padding
-                name="heart{{!wishlist.isFav(y) ? '-outline' : ''}}"
-              ></ion-icon>
+            <button class="fav" tappable (click)="setFav(y)" ion-button clear icon-only>
+              <ion-icon no-padding name="heart{{!wishlist.isFav(y) ? '-outline' : ''}}"></ion-icon>
             </button>
             <div tappable (click)="goTo('ProductdetailPage', y)">
               <img-loader [src]="y.images[0].src" useImg>
@@ -491,16 +329,9 @@
                 <span [innerHTML]="y.price_html"></span>
               </div>
               <div class="rate">
-                <rating
-                  *ngIf="y.average_rating"
-                  max="5"
-                  readOnly="true"
-                  [(ngModel)]="y.average_rating"
-                >
+                <rating *ngIf="y.average_rating" max="5" readOnly="true" [(ngModel)]="y.average_rating">
                 </rating>
-                <span class="rating_count" *ngIf="y.rating_count"
-                  >({{product.rating_count}})</span
-                >
+                <span class="rating_count" *ngIf="y.rating_count">({{product.rating_count}})</span>
               </div>
             </div>
           </div>
@@ -508,28 +339,15 @@
       </ion-slides>
     </div>
 
-    <div
-      class="product-slider single-product-section"
-      *ngIf="product.related_ids.length>0 && product.related"
-    >
+    <div class="product-slider single-product-section" *ngIf="product.related_ids.length>0 && product.related">
       <ion-list-header no-lines mode="md">
         {{'RELATED' | translate}}
       </ion-list-header>
       <ion-slides spaceBetween="8" [slidesPerView]="slidesPerView" [dir]="dir">
         <ion-slide *ngFor="let y of product.related">
           <div class="product-item">
-            <button
-              class="fav"
-              tappable
-              (click)="setFav(y)"
-              ion-button
-              clear
-              icon-only
-            >
-              <ion-icon
-                no-padding
-                name="heart{{!wishlist.isFav(y) ? '-outline' : ''}}"
-              ></ion-icon>
+            <button class="fav" tappable (click)="setFav(y)" ion-button clear icon-only>
+              <ion-icon no-padding name="heart{{!wishlist.isFav(y) ? '-outline' : ''}}"></ion-icon>
             </button>
             <div tappable (click)="goTo('ProductdetailPage', y)">
               <img-loader [src]="y.images[0].src" useImg>
@@ -540,16 +358,9 @@
                 <span [innerHTML]="y.price_html"></span>
               </div>
               <div class="rate">
-                <rating
-                  *ngIf="y.average_rating"
-                  max="5"
-                  readOnly="true"
-                  [(ngModel)]="y.average_rating"
-                >
+                <rating *ngIf="y.average_rating" max="5" readOnly="true" [(ngModel)]="y.average_rating">
                 </rating>
-                <span class="rating_count" *ngIf="y.rating_count"
-                  >({{product.rating_count}})</span
-                >
+                <span class="rating_count" *ngIf="y.rating_count">({{product.rating_count}})</span>
               </div>
             </div>
           </div>
@@ -560,27 +371,16 @@
 </ion-content>
 
 <ion-footer
-  *ngIf="product && (product.purchasable || (product.type==='external' && product.external_url) || product.type==='grouped')"
->
+  *ngIf="product && (product.purchasable || (product.type==='external' && product.external_url) || product.type==='grouped')">
   <ion-row no-padding>
-    <ion-col
-      no-padding
-      *ngIf="product.type==='external';else purchaseOptions"
-      tappable
-      (tap)="buyExternal()"
-    >
+    <ion-col no-padding *ngIf="product.type==='external';else purchaseOptions" tappable (tap)="buyExternal()">
       <button ion-button full tappable icon-start class="accent-background">
         <ion-icon ios="ios-open" md="md-open"></ion-icon>
         {{'BUY_EXTERNAL_PRODUCT' | translate}}
       </button>
     </ion-col>
     <ng-template #purchaseOptions>
-      <ion-col
-        col-6
-        no-padding
-        *ngIf="product.in_stock"
-        (tap)="addToCart(true)"
-      >
+      <ion-col col-6 no-padding *ngIf="product.in_stock" (tap)="addToCart(true)">
         <!-- <button ion-button full tappable icon-start clear *ngIf="wishlist.isFav(product)" class="light-grey-button"
           (click)="setFav(product)">
           <ion-icon name="heart" class="accent"></ion-icon>
@@ -591,20 +391,13 @@
           <ion-icon name="heart-outline"></ion-icon>
           {{'ADD_TO_WISHLIST' | translate}}
         </button> -->
-        <button ion-button full tappable icon-start class="primary-background">
+        <button ion-button full tappable icon-start class="light-grey-button">
           <ion-icon name="md-basket"></ion-icon>
           {{'BUY_NOW' | translate}}
         </button>
       </ion-col>
       <ion-col col-6 no-padding *ngIf="product.in_stock" (tap)="addToCart()">
-        <button
-          ion-button
-          full
-          tappable
-          icon-start
-          class="accent-background"
-          style="color: black;"
-        >
+        <button ion-button full tappable icon-start class="accent-background">
           <ion-icon name="md-cart"></ion-icon>
           {{'ADD_TO_CART' | translate}}
         </button>
