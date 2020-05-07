@@ -276,14 +276,21 @@ page-productdetail {
 
           .delivery_availablity {
             font-size: 14px;
-
+            font-weight: 800;
+            // color: #000;
             span {
               font-weight: 800;
-              color: #000;
+              //color: #000;
             }
           }
         }
       }
+    }
+
+    .location {
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 5px;
     }
 
     .item.del_option {
