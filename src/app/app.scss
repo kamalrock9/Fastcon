@@ -324,7 +324,7 @@ h6 {
 
   margin-bottom: 16px;
   margin-top: 16px;
-  height: 60px !important;
+  height: 90px !important;
 
   .img {
     //width: 90px;
@@ -376,8 +376,80 @@ h6 {
 
 .product-item {
   @include text-align("start");
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  ion-badge {
+    position: absolute;
+    @include position(5px, null, null, 5px);
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+    height: 30px;
+    width: 30px;
+  }
 
+  button.fav {
+    padding: 4px !important;
+    position: absolute;
+    @include position(5px, 5px, null, null);
+    display: block;
+    z-index: 3;
+    font-size: 1.3rem;
+    height: auto;
+  }
+
+  .product-name {
+    margin: 5px;
+  }
+  .price {
+    margin: 5px 5px 0px 5px;
+  }
+
+  .product-name {
+    font-size: 1.3rem;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .rate {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .rating_count {
+      font-size: 1.2rem;
+      display: inline !important;
+    }
+  }
+
+  ul {
+    padding: 0px;
+    @include margin(0px, 0px, 0px, 5px);
+
+    &.rating li {
+      padding: 0px !important;
+      background: none;
+      color: var(--accent_color) !important;
+
+      ion-icon {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.rightborder {
+  @include text-align("start");
+  border-bottom: 1px solid #ddd;
   ion-badge {
     position: absolute;
     @include position(5px, null, null, 5px);

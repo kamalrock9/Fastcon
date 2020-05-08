@@ -146,7 +146,7 @@
         no-padding
         *ngFor="let product of products;let i=index"
       >
-        <div class="product-item" style="border: 0px;">
+        <div [ngClass]="i%2==0 ? 'product-item' : 'rightborder'">
           <button
             class="fav"
             tappable
