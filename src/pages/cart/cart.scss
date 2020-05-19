@@ -3,6 +3,10 @@ page-cart {
     background: #f5f5f5 !important;
   }
 
+  .list-md .item-block .item-inner {
+    border-bottom: 0px solid #dedede;
+  }
+
   .div {
     display: flex;
     flex-direction: column;
@@ -15,7 +19,6 @@ page-cart {
     display: flex;
     align-items: center;
   }
-
 
   .product-name-and-delete {
     display: flex;
@@ -81,15 +84,12 @@ page-cart {
 
         &:nth-of-type(1) {
           @include margin(null, 10px, null, null);
-
         }
 
         &:nth-of-type(2) {
           @include margin(null, null, null, 10px);
-
         }
       }
-
     }
   }
 
@@ -101,7 +101,7 @@ page-cart {
     padding: 10px 10px 10px 0;
     margin: 8px 0;
     background: #fff;
-    border-bottom: 1px solid #d3d3d370;
+    border-bottom: 0px solid #d3d3d370;
     border-top: 1px solid #d3d3d370;
 
     .applied_coupons {
@@ -115,7 +115,7 @@ page-cart {
         padding: 0 0 0 7px;
 
         span:nth-of-type(1) {
-          color: #00CC00;
+          color: #00cc00;
           @include margin(null, 6px, null, null);
         }
       }

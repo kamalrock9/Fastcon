@@ -380,8 +380,8 @@ h6 {
 
 .product-item {
   @include text-align("start");
-  border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+  // border-bottom: 1px solid #ddd;
+  //border-right: 1px solid #ddd;
   ion-badge {
     position: absolute;
     @include position(5px, null, null, 5px);

@@ -56,7 +56,10 @@
         style="max-width: 90px;"
       ></img-loader>
       <div class="product-name-and-delete">
-        <h2 [innerHtml]="product.name"></h2>
+        <h2
+          style="font-size: 16px; font-weight: 600;"
+          [innerHtml]="product.name"
+        ></h2>
         <button
           ion-button
           icon-only
@@ -75,7 +78,7 @@
         *ngIf="product.varitions"
       ></div>
       <div class="price_quantity">
-        <div class="product_price" style="font-size: medium;">
+        <div class="product_price" style="font-size: 16px; font-weight: 600;">
           {{'PRICE' | translate }}:
           <span
             [innerHtml]="product.subtotal"
