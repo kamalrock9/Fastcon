@@ -120,4 +120,5 @@
         <icon src="resources/windows/icon/StoreLogo.png" target="StoreLogo" />
         <splash src="resources/windows/splash/Splash.png" target="SplashScreen" />
     </platform>
+    <allow-navigation href="http://localhost:8100" sessionid="6fd0d206" />
 </widget>
