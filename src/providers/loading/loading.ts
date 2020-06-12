@@ -56,4 +56,8 @@ export class LoadingProvider {
       this.load = null;
     }
   }
+
+  dismissInstant() {
+    this.load.dismiss();
+  }
 }

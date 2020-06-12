@@ -9,6 +9,7 @@ import {
   Navbar,
   Platform,
   IonicApp,
+  LoadingController,
 } from "ionic-angular";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { SettingsProvider, ToastProvider } from "../../providers/providers";
@@ -44,7 +45,7 @@ export class PaymentPage {
     private toast: ToastProvider,
     private translate: TranslateService,
     private ionicApp: IonicApp,
-    private payPal: PayPal
+    private loadingCtrl: LoadingController
   ) {
     this.orderDetails = navParams.data.params;
     console.log(this.orderDetails);
@@ -130,13 +131,24 @@ export class PaymentPage {
     if (this.orderDetails.payment_method == "razorpay") {
       this.razorpayCheckout();
       return;
-    } else if (this.orderDetails.payment_method == "paypal") {
-      this.paypalCheckout();
-      return;
     }
-    this.translate.get(["PAYMENT_LOADING"]).subscribe((x) => {
-      this.loader.showWithMessage(x.PAYMENT_LOADING);
+    let load = this.loadingCtrl.create({
+      //content: x.LOADING,
+      // spinner: 'ios',
+      cssClass: "loading-custom-msg",
+      content: `<div class="header">
+                  </div>
+                  <div class="content">
+                    <div class="loader_outer">
+                      <div class="loader"></div></br>
+                      Please Wait While we are redirecting to payment gateway.
+                    </div>
+                  </div>`,
+      spinner: "hide",
+      dismissOnPageChange: false,
     });
+    load.present();
+
     let browser;
     if (this.orderDetails.payment_method == "wallet") {
       browser = this.iab.create(
@@ -177,13 +189,13 @@ export class PaymentPage {
             event.url.includes("paytm.in")
           ) {
             browser.show();
-            this.loader.dismiss();
+            load.dismiss();
           }
         });
         break;
       case "wallet":
         browser.on("loadstart").subscribe((event) => {
-          this.loader.dismiss();
+          load.dismiss();
           console.log(event);
         });
         browser.on("loadstop").subscribe((event) => {
@@ -196,7 +208,7 @@ export class PaymentPage {
           if (event.url.includes("payu")) {
             browser.show();
             openpumcp = true;
-            this.loader.dismiss();
+            load.dismiss();
           }
           if (event.url.includes(App.url) && openpumcp) {
             browser.close();
@@ -205,7 +217,7 @@ export class PaymentPage {
         break;
       case "instamojo":
         browser.show();
-        this.loader.dismiss();
+        load.dismiss();
         browser.on("loadstart").subscribe((event) => {
           if (event.url.includes("/order-received")) {
             browser.close();
@@ -216,16 +228,16 @@ export class PaymentPage {
         //   if (event.url.includes('payu')) {
         //     browser.show();
         //     openedgateway = true;
-        //     this.loader.dismiss();
+        //     load.dismiss();
         //   }
         // });
         break;
       case "ccavenue":
         let openccavenue = false;
-        this.loader.dismiss();
-        browser.show();
         browser.on("loadstop").subscribe((event) => {
           if (event.url.includes("ccavenue")) {
+            browser.show();
+            load.dismiss();
             openccavenue = true;
           }
           browser.on("loadstart").subscribe((event) => {
@@ -245,7 +257,7 @@ export class PaymentPage {
         browser.on("loadstop").subscribe((event) => {
           if (event.url.includes("/order-pay")) {
             browser.show();
-            this.loader.dismiss();
+            load.dismiss();
           }
         });
         break;
@@ -300,86 +312,6 @@ export class PaymentPage {
         this.refreshPage();
       }
     );
-  }
-
-  paypalCheckout() {
-    this.payPal
-      .init({
-        PayPalEnvironmentProduction:
-          "AXKXLuSmPRXsWUGWG8EASB4jSD7_grxfN9YBqbD6WJ6l4_nzznl5BROrFWgMIFCZVbSCdEP-noTRpG-R",
-        PayPalEnvironmentSandbox:
-          "AXKXLuSmPRXsWUGWG8EASB4jSD7_grxfN9YBqbD6WJ6l4_nzznl5BROrFWgMIFCZVbSCdEP-noTRpG-R",
-      })
-      .then(
-        () => {
-          // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
-          this.payPal
-            .prepareToRender(
-              "PayPalEnvironmentSandbox",
-              new PayPalConfiguration({
-                // Only needed if you get an "Internal Service Error" after PayPal login!
-                //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
-                defaultUserEmail: this.orderDetails.billing.email || "",
-                merchantName: "Fastcon Shopping",
-              })
-            )
-            .then(
-              () => {
-                // let payment = new PayPalPayment(
-                //   this.orderDetails.total,
-                //   this.orderDetails.currency,
-                //   "Payment for order id" + this.orderDetails.id,
-                //   "sale"
-                // );
-                let payment = new PayPalPayment(
-                  "3.33",
-                  "INR",
-                  "Description",
-                  "sale"
-                );
-
-                this.payPal.renderSinglePaymentUI(payment).then(
-                  (res) => {
-                    this.refreshPage(res.response.id);
-
-                    // Successfully paid
-                    // Example sandbox response
-                    //
-                    // {
-                    //   "client": {
-                    //     "environment": "sandbox",
-                    //     "product_name": "PayPal iOS SDK",
-                    //     "paypal_sdk_version": "2.16.0",
-                    //     "platform": "iOS"
-                    //   },
-                    //   "response_type": "payment",
-                    //   "response": {
-                    //     "id": "PAY-1AB23456CD789012EF34GHIJ",
-                    //     "state": "approved",
-                    //     "create_time": "2016-10-03T13:33:33Z",
-                    //     "intent": "sale"
-                    //   }
-                    // }
-                  },
-                  (e) => {
-                    console.log(e);
-                    alert(e);
-                    this.refreshPage();
-                    // Error or render dialog closed without being successful
-                  }
-                );
-              },
-              (e) => {
-                console.log(e);
-                alert("Error in configuration");
-              }
-            );
-        },
-        (e) => {
-          console.log(e);
-          alert("Error in initialization, maybe PayPal isn't supported");
-        }
-      );
   }
 
   calculatePrice(x) {
