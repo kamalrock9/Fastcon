@@ -13,6 +13,11 @@ import {
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { SettingsProvider, ToastProvider } from "../../providers/providers";
 import { TranslateService } from "@ngx-translate/core";
+import {
+  PayPal,
+  PayPalPayment,
+  PayPalConfiguration,
+} from "@ionic-native/paypal";
 declare var RazorpayCheckout: any;
 
 @IonicPage({
@@ -38,7 +43,8 @@ export class PaymentPage {
     private loader: LoadingProvider,
     private toast: ToastProvider,
     private translate: TranslateService,
-    private ionicApp: IonicApp
+    private ionicApp: IonicApp,
+    private payPal: PayPal
   ) {
     this.orderDetails = navParams.data.params;
     console.log(this.orderDetails);
@@ -123,6 +129,9 @@ export class PaymentPage {
     let cus_id = "&CUST_ID=" + this.orderDetails.customer_id;
     if (this.orderDetails.payment_method == "razorpay") {
       this.razorpayCheckout();
+      return;
+    } else if (this.orderDetails.payment_method == "paypal") {
+      this.paypalCheckout();
       return;
     }
     this.translate.get(["PAYMENT_LOADING"]).subscribe((x) => {
@@ -292,6 +301,87 @@ export class PaymentPage {
       }
     );
   }
+
+  paypalCheckout() {
+    this.payPal
+      .init({
+        PayPalEnvironmentProduction:
+          "AXKXLuSmPRXsWUGWG8EASB4jSD7_grxfN9YBqbD6WJ6l4_nzznl5BROrFWgMIFCZVbSCdEP-noTRpG-R",
+        PayPalEnvironmentSandbox:
+          "AXKXLuSmPRXsWUGWG8EASB4jSD7_grxfN9YBqbD6WJ6l4_nzznl5BROrFWgMIFCZVbSCdEP-noTRpG-R",
+      })
+      .then(
+        () => {
+          // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
+          this.payPal
+            .prepareToRender(
+              "PayPalEnvironmentSandbox",
+              new PayPalConfiguration({
+                // Only needed if you get an "Internal Service Error" after PayPal login!
+                //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
+                defaultUserEmail: this.orderDetails.billing.email || "",
+                merchantName: "Fastcon Shopping",
+              })
+            )
+            .then(
+              () => {
+                // let payment = new PayPalPayment(
+                //   this.orderDetails.total,
+                //   this.orderDetails.currency,
+                //   "Payment for order id" + this.orderDetails.id,
+                //   "sale"
+                // );
+                let payment = new PayPalPayment(
+                  "3.33",
+                  "INR",
+                  "Description",
+                  "sale"
+                );
+
+                this.payPal.renderSinglePaymentUI(payment).then(
+                  (res) => {
+                    this.refreshPage(res.response.id);
+
+                    // Successfully paid
+                    // Example sandbox response
+                    //
+                    // {
+                    //   "client": {
+                    //     "environment": "sandbox",
+                    //     "product_name": "PayPal iOS SDK",
+                    //     "paypal_sdk_version": "2.16.0",
+                    //     "platform": "iOS"
+                    //   },
+                    //   "response_type": "payment",
+                    //   "response": {
+                    //     "id": "PAY-1AB23456CD789012EF34GHIJ",
+                    //     "state": "approved",
+                    //     "create_time": "2016-10-03T13:33:33Z",
+                    //     "intent": "sale"
+                    //   }
+                    // }
+                  },
+                  (e) => {
+                    console.log(e);
+                    alert(e);
+                    this.refreshPage();
+                    // Error or render dialog closed without being successful
+                  }
+                );
+              },
+              (e) => {
+                console.log(e);
+                alert("Error in configuration");
+              }
+            );
+        },
+        (e) => {
+          console.log(e);
+          alert("Error in initialization, maybe PayPal isn't supported");
+        }
+      );
+  }
+
   calculatePrice(x) {
     return x.prices_include_tax
       ? x.total
