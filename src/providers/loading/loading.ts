@@ -6,9 +6,8 @@ import { LoadingController } from "ionic-angular";
 export class LoadingProvider {
   load: any;
   constructor(
-    private loader: LoadingController
-  ) //private translate: TranslateService
-  {}
+    private loader: LoadingController //private translate: TranslateService
+  ) {}
 
   async show(dismissOnPageChange = true) {
     console.log("here");
@@ -58,5 +57,9 @@ export class LoadingProvider {
       await this.load.dismiss();
       this.load = null;
     }
+  }
+
+  dismissInstant() {
+    this.load.dismiss();
   }
 }
