@@ -126,6 +126,7 @@ export class CheckoutPage {
                 //data.payment_gateway[i].gateway_id == "instamojo" ||
                 //data.payment_gateway[i].gateway_id == "pumcp" ||
                 data.payment_gateway[i].gateway_id == "ccavenue" ||
+                data.payment_gateway[i].gateway_id == "paypal" ||
                 data.payment_gateway[i].gateway_id == "wallet"
               ) {
                 payment.push(data.payment_gateway[i]);

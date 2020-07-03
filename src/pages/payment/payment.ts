@@ -9,10 +9,16 @@ import {
   Navbar,
   Platform,
   IonicApp,
+  LoadingController,
 } from "ionic-angular";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { SettingsProvider, ToastProvider } from "../../providers/providers";
 import { TranslateService } from "@ngx-translate/core";
+import {
+  PayPal,
+  PayPalPayment,
+  PayPalConfiguration,
+} from "@ionic-native/paypal";
 declare var RazorpayCheckout: any;
 
 @IonicPage({
@@ -38,7 +44,8 @@ export class PaymentPage {
     private loader: LoadingProvider,
     private toast: ToastProvider,
     private translate: TranslateService,
-    private ionicApp: IonicApp
+    private ionicApp: IonicApp,
+    private loadingCtrl: LoadingController
   ) {
     this.orderDetails = navParams.data.params;
     console.log(this.orderDetails);
@@ -125,9 +132,23 @@ export class PaymentPage {
       this.razorpayCheckout();
       return;
     }
-    this.translate.get(["PAYMENT_LOADING"]).subscribe((x) => {
-      this.loader.showWithMessage(x.PAYMENT_LOADING);
+    let load = this.loadingCtrl.create({
+      //content: x.LOADING,
+      // spinner: 'ios',
+      cssClass: "loading-custom-msg",
+      content: `<div class="header">
+                  </div>
+                  <div class="content">
+                    <div class="loader_outer">
+                      <div class="loader"></div></br>
+                      Please Wait While we are redirecting to payment gateway.
+                    </div>
+                  </div>`,
+      spinner: "hide",
+      dismissOnPageChange: false,
     });
+    load.present();
+
     let browser;
     if (this.orderDetails.payment_method == "wallet") {
       browser = this.iab.create(
@@ -168,13 +189,13 @@ export class PaymentPage {
             event.url.includes("paytm.in")
           ) {
             browser.show();
-            this.loader.dismiss();
+            load.dismiss();
           }
         });
         break;
       case "wallet":
         browser.on("loadstart").subscribe((event) => {
-          this.loader.dismiss();
+          load.dismiss();
           console.log(event);
         });
         browser.on("loadstop").subscribe((event) => {
@@ -187,7 +208,7 @@ export class PaymentPage {
           if (event.url.includes("payu")) {
             browser.show();
             openpumcp = true;
-            this.loader.dismiss();
+            load.dismiss();
           }
           if (event.url.includes(App.url) && openpumcp) {
             browser.close();
@@ -196,7 +217,7 @@ export class PaymentPage {
         break;
       case "instamojo":
         browser.show();
-        this.loader.dismiss();
+        load.dismiss();
         browser.on("loadstart").subscribe((event) => {
           if (event.url.includes("/order-received")) {
             browser.close();
@@ -207,16 +228,16 @@ export class PaymentPage {
         //   if (event.url.includes('payu')) {
         //     browser.show();
         //     openedgateway = true;
-        //     this.loader.dismiss();
+        //     load.dismiss();
         //   }
         // });
         break;
       case "ccavenue":
         let openccavenue = false;
-        this.loader.dismiss();
-        browser.show();
         browser.on("loadstop").subscribe((event) => {
           if (event.url.includes("ccavenue")) {
+            browser.show();
+            load.dismiss();
             openccavenue = true;
           }
           browser.on("loadstart").subscribe((event) => {
@@ -236,7 +257,7 @@ export class PaymentPage {
         browser.on("loadstop").subscribe((event) => {
           if (event.url.includes("/order-pay")) {
             browser.show();
-            this.loader.dismiss();
+            load.dismiss();
           }
         });
         break;
@@ -292,6 +313,7 @@ export class PaymentPage {
       }
     );
   }
+
   calculatePrice(x) {
     return x.prices_include_tax
       ? x.total
