@@ -247,7 +247,7 @@ export class PaymentPage {
       description: "Order  " + this.orderDetails.id,
       image: "",
       currency: this.orderDetails.currency,
-      key: "rzp_live_Mw6y1rFt9AqPGr",
+      key: "rzp_live_Az3uoHu8GCmAFt",
       amount: parseFloat(this.orderDetails.total) * 100,
       name: App.store,
       prefill: {

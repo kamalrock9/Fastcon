@@ -122,7 +122,7 @@ export class CheckoutPage {
                 //data.payment_gateway[i].gateway_id == "paytm" ||
                 data.payment_gateway[i].gateway_id == "bacs" ||
                 data.payment_gateway[i].gateway_id == "cheque" ||
-                //data.payment_gateway[i].gateway_id == "razorpay" ||
+                data.payment_gateway[i].gateway_id == "razorpay" ||
                 //data.payment_gateway[i].gateway_id == "instamojo" ||
                 //data.payment_gateway[i].gateway_id == "pumcp" ||
                 data.payment_gateway[i].gateway_id == "ccavenue" ||
