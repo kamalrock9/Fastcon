@@ -66,7 +66,7 @@
     "cordova-plugin-x-socialsharing": "^5.6.3",
     "es6-promise-plugin": "^4.2.2",
     "ionic-angular": "3.9.9",
-    "ionic-image-loader": "^6.3.3",
+    "ionic-image-loader": "^6.3.2",
     "ionic-plugin-deeplinks": "^1.0.20",
     "ionic2-rating": "^1.2.2",
     "ionicons": "3.0.0",
@@ -113,7 +113,9 @@
       "onesignal-cordova-plugin": {},
       "com-sarriaroman-photoviewer": {},
       "cordova-plugin-x-socialsharing": {
-        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
+        "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
       },
       "ionic-plugin-deeplinks": {
         "URL_SCHEME": "wooapp",
@@ -148,8 +150,8 @@
       "com.paypal.cordova.mobilesdk": {}
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
