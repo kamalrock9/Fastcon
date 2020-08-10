@@ -14,11 +14,6 @@ import {
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { SettingsProvider, ToastProvider } from "../../providers/providers";
 import { TranslateService } from "@ngx-translate/core";
-import {
-  PayPal,
-  PayPalPayment,
-  PayPalConfiguration,
-} from "@ionic-native/paypal";
 declare var RazorpayCheckout: any;
 
 @IonicPage({
