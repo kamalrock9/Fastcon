@@ -24,7 +24,7 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="orientation" value="portrait" />
-     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
         <string>Camera Permission needed by paypal native sdk for scanning cards for faster checkout.</string>
     </edit-config>
     <platform name="android">
