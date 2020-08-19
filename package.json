@@ -138,7 +138,7 @@
       "com.razorpay.cordova": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "396325367416-ehjrtbefau8i1v01s0pkkcodrmb9mc62.apps.googleusercontent.com",
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.396325367416-tg2vvspqvm9k4c9l74hnv0amlq0vh7ch",
         "PLAY_SERVICES_VERSION": "15.0.1"
       },
       "com.paypal.cordova.mobilesdk": {},

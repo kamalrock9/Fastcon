@@ -3,7 +3,7 @@ var fs = require("fs");
 var path = require("path");
 
 //Path to the project.pbxproj file
-const projectPath = "platforms/ios/WooApp.xcodeproj/project.pbxproj";
+const projectPath = "platforms/ios/Fastcon Shopping.xcodeproj/project.pbxproj";
 const myProj = xcode.project(projectPath);
 
 TARGET_BUILD_DIR = "${TARGET_BUILD_DIR}";
@@ -41,10 +41,10 @@ var options = {
     rm "$FRAMEWORK_EXECUTABLE_PATH"
     mv "$FRAMEWORK_EXECUTABLE_PATH-merged" "$FRAMEWORK_EXECUTABLE_PATH"
 
-    done`
+    done`,
 };
 
-myProj.parse(function(err) {
+myProj.parse(function (err) {
   myProj.addBuildPhase(
     [],
     "PBXShellScriptBuildPhase",
