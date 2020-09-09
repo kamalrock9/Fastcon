@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      <img src="assets/imgs/FASTCON.png" style="width: 100px; height: 36px;" />
+      <img src="assets/imgs/FASTCON.png" style="width: 100px; height: 36px" />
     </ion-title>
     <ion-buttons end>
       <button mode="md" ion-button clear icon-only (click)="showSearch()">
@@ -306,7 +306,7 @@
       margin-start
       *ngIf="layout.categories && layout.categories.length>0"
     >
-      <ion-item no-padding no-lines style="font-weight: 700;">
+      <ion-item no-padding no-lines style="font-weight: 700">
         {{'ALL_CATEGORIES'| translate}}
         <button
           item-end
@@ -340,6 +340,102 @@
         </ng-container>
       </ion-row>
     </ion-scroll>
+
+    <!--Custom Layout-->
+    <div class="flipkart">
+      <ng-container *ngFor="let section of layout.section">
+        <div class="one-grid-category" *ngIf="section.grid_typ=='1'">
+          <div
+            class="productimage"
+            tappable
+            (click)="goTo('ProductPage', section.layout_data[0])"
+          >
+            <img [src]="section.layout_data[0].url" />
+          </div>
+        </div>
+
+        <div class="two-grid-category" *ngIf="section.grid_typ=='2'">
+          <ion-row>
+            <ion-col col-6 *ngFor="let layout_data of section.layout_data">
+              <div
+                class="productimage"
+                tappable
+                (click)="goTo('ProductPage', section.layout_data[0])"
+              >
+                <img [src]="section.layout_data[0].url" />
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <div class="three-grid-category" *ngIf="section.grid_typ=='3'">
+          <div class="vewall_area">
+            <h1>{{section.section_title}}<br /></h1>
+            <button
+              tappable
+              (click)="goTo('ProductPage', { id: section.layout_main })"
+            >
+              view all
+            </button>
+          </div>
+          <div class="productarea">
+            <ion-row>
+              <ion-col col-8>
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', section.layout_data[0])"
+                >
+                  <img [src]="section.layout_data[0].url" />
+                </div>
+              </ion-col>
+
+              <ion-col col-4>
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', section.layout_data[1])"
+                >
+                  <img [src]="section.layout_data[1].url" />
+                </div>
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', section.layout_data[2])"
+                >
+                  <img [src]="section.layout_data[2].url" />
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <div class="four-grid-category" *ngIf="section.grid_typ=='4'">
+          <div class="vewall_area">
+            <h1>{{section.section_title}}<br /></h1>
+            <button
+              tappable
+              (click)="goTo('ProductPage', { id: section.layout_main })"
+            >
+              view all
+            </button>
+          </div>
+          <div class="productarea">
+            <ion-row>
+              <ion-col col-6 *ngFor="let layout_data of section.layout_data">
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', layout_data)"
+                >
+                  <img [src]="layout_data.url" />
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </ng-container>
+    </div>
 
     <div
       class="product-slider"

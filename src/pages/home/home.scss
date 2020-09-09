@@ -281,4 +281,174 @@ page-home {
       margin-top: 15px;
     }
   }
+
+  .flipkart {
+    width: 100%;
+
+    .four-grid-category {
+      background: linear-gradient(rgb(40, 116, 240), rgb(40, 116, 240));
+      width: 100%;
+      height: auto;
+      padding: 15px 16px 0px;
+      margin-bottom: 16px;
+
+      .vewall_area {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 19px 0px 0px;
+        text-transform: capitalize;
+        p {
+          font-size: 14px;
+          margin-top: 3px;
+          color: #878787;
+          margin-bottom: 0px;
+        }
+        h1 {
+          font-size: 15px;
+          color: #fff;
+        }
+      }
+      button {
+        background: #2ca032;
+        color: white;
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+        text-transform: capitalize;
+        box-shadow: none;
+      }
+      .productarea {
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0 1px 1.5px 0px rgba(0, 0, 0, 0.16);
+        transform: translate(0, 12px);
+        .col {
+          border: 1px solid #f0f0f0;
+          padding: 0;
+
+          .productcontent {
+            text-align: center;
+            padding-top: 7px;
+            padding-bottom: 5px;
+            span {
+              font-size: 13px;
+              color: #262626;
+              line-height: 16px;
+              margin-top: 8px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+              overflow: hidden;
+              text-align: center;
+            }
+            p {
+              font-size: 14px;
+              color: #388e3c;
+              line-height: 24px;
+              margin-top: 0px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+              overflow: hidden;
+              text-align: center;
+              margin-bottom: 0px;
+            }
+          }
+          .productimage {
+            width: 100%;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+    .three-grid-category {
+      background: #fff;
+      width: 100%;
+      height: auto;
+      padding: 15px 0 0px;
+      //margin-bottom: 23px;
+
+      .vewall_area {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0px;
+        padding: 19px 16px 0;
+        text-transform: capitalize;
+        p {
+          font-size: 14px;
+          margin-top: 3px;
+          color: #878787;
+          margin-bottom: 0px;
+        }
+        h1 {
+          font-size: 15px;
+          color: #000;
+        }
+      }
+      button {
+        background: #2ca032;
+        color: white;
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+        text-transform: capitalize;
+        box-shadow: none;
+      }
+      .productarea {
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0 1px 1.5px 0px rgba(0, 0, 0, 0.16);
+        transform: translate(0, 8px);
+        .col {
+          border: 1px solid #f0f0f0 !important;
+          padding: 0;
+
+          .productcontent {
+            text-align: center;
+            padding-top: 7px;
+            padding-bottom: 5px;
+            span {
+              font-size: 13px;
+              color: #262626;
+              line-height: 16px;
+              margin-top: 8px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+              overflow: hidden;
+              text-align: center;
+            }
+            p {
+              font-size: 14px;
+              color: #388e3c;
+              line-height: 24px;
+              margin-top: 0px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+              overflow: hidden;
+              text-align: center;
+              margin-bottom: 0px;
+            }
+          }
+          .productimage {
+            width: 100%;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+    .two-grid-category {
+      .col {
+        padding: 0;
+        border: 1px solid #f0f0f0;
+      }
+    }
+  }
 }
