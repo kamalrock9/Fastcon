@@ -75,6 +75,7 @@ export class HomePage {
 
     this.WC.getHomePageLayout().subscribe(
       (x) => {
+        console.log(x);
         this.layout = x;
         this.settings.setSettings(x, "layout");
       },
