@@ -18,12 +18,12 @@ page-wishlist {
         flex: 1;
         font-size: 16px;
         font-weight: 700;
-        @include margin(null, null, null, 5px);
+        @include margin(null, 20px, null, 5px);
       }
       .icon {
         font-size: 30px;
         position: absolute;
-        @include position(null,5px,null,null);
+        @include position(null, 5px, null, null);
       }
     }
     .price {
