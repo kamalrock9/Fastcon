@@ -11,13 +11,13 @@ import {
   Events,
   ModalController,
   Slides,
+  LoadingController,
 } from "ionic-angular";
 import {
   WooCommerceProvider,
   WishlistProvider,
   ToastProvider,
   SettingsProvider,
-  LoadingProvider,
   RestProvider,
 } from "../../providers/providers";
 import { SocialSharing } from "@ionic-native/social-sharing";
@@ -40,6 +40,7 @@ export class ProductdetailPage {
   pattern: any = /\[.+\]/g;
   dir: string;
   slidesPerView: number = 2.5;
+  load: any;
 
   constructor(
     public navCtrl: NavController,
@@ -47,7 +48,7 @@ export class ProductdetailPage {
     private WC: WooCommerceProvider,
     public wishlist: WishlistProvider,
     private toast: ToastProvider,
-    private loader: LoadingProvider,
+    private loader: LoadingController,
     private restClient: RestProvider,
     private translate: TranslateService,
     private platform: Platform,
@@ -104,7 +105,21 @@ export class ProductdetailPage {
       this.navParams.data.params.isReferedByDeeplinks
     ) {
       console.log("Deeplinks");
-      this.loader.show();
+      this.load = this.loader.create({
+        //content: x.LOADING,
+        // spinner: 'ios',
+        cssClass: "loading-custom",
+        content: `<div class="header">
+                    </div>
+                    <div class="content">
+                      <div class="loader_outer">
+                        <div class="loader">
+                        </div>
+                      </div>
+                    </div>`,
+        spinner: "hide",
+      });
+      this.load.present();
       this.WC.getProductByUrl(this.navParams.data.params.link).subscribe(
         (res) => {
           if (res) {
@@ -197,11 +212,25 @@ export class ProductdetailPage {
   }
 
   loadVariation(data) {
-    this.loader.show();
+    this.load = this.loader.create({
+      //content: x.LOADING,
+      // spinner: 'ios',
+      cssClass: "loading-custom",
+      content: `<div class="header">
+                  </div>
+                  <div class="content">
+                    <div class="loader_outer">
+                      <div class="loader">
+                      </div>
+                    </div>
+                  </div>`,
+      spinner: "hide",
+    });
+    this.load.present();
     console.log("Loading Variation");
     this.WC.getProductVariation(data).subscribe(
       (res: any) => {
-        this.loader.dismiss();
+        this.load.dismiss();
         console.log(res);
         if (!res.error) {
           this.setVariation(res);
@@ -215,7 +244,7 @@ export class ProductdetailPage {
       (err) => {
         console.log(err);
         this.toast.showError();
-        this.loader.dismiss();
+        this.load.dismiss();
         this.product.issetVariation = false;
       }
     );
@@ -418,11 +447,25 @@ export class ProductdetailPage {
           }
         }
         console.log(data);
-        this.loader.show();
+        this.load = this.loader.create({
+          //content: x.LOADING,
+          // spinner: 'ios',
+          cssClass: "loading-custom",
+          content: `<div class="header">
+                      </div>
+                      <div class="content">
+                        <div class="loader_outer">
+                          <div class="loader">
+                          </div>
+                        </div>
+                      </div>`,
+          spinner: "hide",
+        });
+        this.load.present();
         this.restClient
           .addToCart(data)
           .then((res: any) => {
-            this.loader.dismiss();
+            this.load.dismiss();
             console.log(res);
 
             let data = JSON.parse(res.data);
@@ -443,7 +486,7 @@ export class ProductdetailPage {
           })
           .catch((err) => {
             console.log(err);
-            this.loader.dismiss();
+            this.load.dismiss();
           });
       });
   }
@@ -490,10 +533,24 @@ export class ProductdetailPage {
       this.postcodeEnter = true;
       return;
     }
-    this.loader.show();
+    this.load = this.loader.create({
+      //content: x.LOADING,
+      // spinner: 'ios',
+      cssClass: "loading-custom",
+      content: `<div class="header">
+                  </div>
+                  <div class="content">
+                    <div class="loader_outer">
+                      <div class="loader">
+                      </div>
+                    </div>
+                  </div>`,
+      spinner: "hide",
+    });
+    this.load.present();
     this.WC.checkPincode(newPostCode, this.product.id).subscribe(
       (res) => {
-        this.loader.dismiss();
+        this.load.dismiss();
         console.log(res);
         this.postcode = newPostCode;
         this.postcodeEnter = false;
@@ -502,7 +559,7 @@ export class ProductdetailPage {
         this.deliveryDetails = res;
       },
       (err) => {
-        this.loader.dismiss();
+        this.load.dismiss();
         this.toast.showError();
       }
     );
