@@ -1,8 +1,8 @@
 export const App: any = {
   store: "Fastcon Shopping", // change this with your app name
   url: "https://www.fastconshopping.com", // change this with your URL (please use https, recommended)
-  consumerKey: "ck_6f8d732eb1d0c4221bd8568fc3f77ece1497dbab", // change this with your Consumer Key from WooCommerce
-  consumerSecret: "cs_c8a0a0e6b60e8047716772e2f35888aca5b7b4fb", // change this with your Consumer Secret from WooCommerce
+  consumerKey: "ck_c933773ee5a241fd065610dd89f4c71c767d8e2f", // change this with your Consumer Key from WooCommerce
+  consumerSecret: "cs_8bdab20f412f1af99c353e31eb355e867bd56ffc", // change this with your Consumer Secret from WooCommerce
   IosAppId: "", // FOR IOS RATING USE APPLE ID from appstoreconnect
 
   languages: [

@@ -263,7 +263,7 @@ export class PaymentPage {
       description: "Order  " + this.orderDetails.id,
       image: "",
       currency: this.orderDetails.currency,
-      key: "rzp_live_Az3uoHu8GCmAFt",
+      key: "rzp_live_T4lyi6Ty1Kq76b",
       amount: parseFloat(this.orderDetails.total) * 100,
       name: App.store,
       prefill: {
@@ -299,11 +299,11 @@ export class PaymentPage {
     RazorpayCheckout.open(
       options,
       (payment_id) => {
-        //alert('payment_id: ' + payment_id);
+        // alert("payment_id: " + payment_id);
         this.refreshPage(payment_id);
       },
       (error) => {
-        //alert(error.description + ' (Error ' + error.code + ')');
+        //  alert(error.description + " (Error " + error.code + ")");
         this.refreshPage();
       }
     );
