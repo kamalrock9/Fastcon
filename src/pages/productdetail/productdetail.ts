@@ -253,10 +253,7 @@ export class ProductdetailPage {
     if (x.image.src) {
       this.product.extraImages = [x.image];
     }
-    this.product.extraImages = [
-      ...this.product.extraImages,
-      ...x.woo_variation_gallery_images,
-    ];
+    this.product.extraImages = [...this.product.extraImages];
     this.slider.slideTo(0);
     this.product.variation_id = x.id;
     this.product.price = x.price;

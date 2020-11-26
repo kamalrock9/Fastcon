@@ -189,6 +189,21 @@
                 </div>
               </ng-container>
             </ng-container>
+            <ng-container *ngSwitchCase="'size'">
+              <ng-container *ngFor="let option of attribute.options">
+                <div
+                  [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.slug?option.slug:option))?'swatches-selected':''"
+                  class="swatches-container"
+                  tappable
+                  (tap)="onVariationChange(attribute.slug,option)"
+                >
+                  <span
+                    class="swatches"
+                    [ngStyle]="{'background-color':option.value}"
+                  ></span>
+                </div>
+              </ng-container>
+            </ng-container>
             <ng-container *ngSwitchCase="'image'">
               <ng-container *ngFor="let option of attribute.options">
                 <div
@@ -301,9 +316,7 @@
           {{'DELIVERY_OPTIONS' | translate}}
         </ion-list-header>
         <ion-item class="del_option" *ngIf="postcodeEnter" no-padding>
-          <ion-label stacked>
-            {{'ENTER_POSTCODE' | translate}}
-          </ion-label>
+          <ion-label stacked> {{'ENTER_POSTCODE' | translate}} </ion-label>
           <ion-input
             type="number"
             [(ngModel)]="newPostCode"
@@ -321,11 +334,7 @@
           </button>
         </ion-item>
         <ion-item *ngIf="!postcodeEnter" no-padding>
-          <ion-icon
-            item-start
-            name="ios-pin"
-            style="color: #757575;"
-          ></ion-icon>
+          <ion-icon item-start name="ios-pin" style="color: #757575"></ion-icon>
           <div class="delivery_availablity" *ngIf="!deliveryDetails.delivery">
             Not Available On This Pin&nbsp;<span>{{postcode}} </span>
           </div>
@@ -350,7 +359,7 @@
         </ion-item>
 
         <ion-row
-          style="align-items: center;"
+          style="align-items: center"
           *ngIf="!postcodeEnter && postcode && deliveryDetails.delivery"
           no-padding
         >
@@ -369,23 +378,23 @@
 
           <ion-col col-1>
             <div>
-              <ion-icon style="color: #757575;" name="md-checkmark"></ion-icon>
+              <ion-icon style="color: #757575" name="md-checkmark"></ion-icon>
             </div>
           </ion-col>
           <ion-col col-1>
             <div>
               <ion-icon
-                style="color: #757575;"
+                style="color: #757575"
                 name="ios-calendar-outline"
               ></ion-icon>
             </div>
           </ion-col>
           <ion-col col-6>
-            <div style="font-weight: 800; color: #757575;">
+            <div style="font-weight: 800; color: #757575">
               Estimated Delivery
             </div>
             <div
-              style="font-weight: 600; font-size: 12px; color: #757575;"
+              style="font-weight: 600; font-size: 12px; color: #757575"
               [innerHTML]="deliveryDetails.delivery_date"
             ></div>
           </ion-col>
@@ -421,30 +430,22 @@
           </ion-row>
           <ion-row no-padding *ngIf="product.total_sales">
             <ion-col col-4 no-padding>{{'TOTAL_SALES' | translate}}</ion-col>
-            <ion-col col-8 no-padding>
-              {{product.total_sales}}
-            </ion-col>
+            <ion-col col-8 no-padding> {{product.total_sales}} </ion-col>
           </ion-row>
           <ion-row no-padding *ngIf="product.sku">
             <ion-col col-4 no-padding>{{'SKU' | translate}}</ion-col>
-            <ion-col col-8 no-padding>
-              {{product.sku}}
-            </ion-col>
+            <ion-col col-8 no-padding> {{product.sku}} </ion-col>
           </ion-row>
           <ion-row
             no-padding
             *ngIf="product.stock_quantity && product.in_stock"
           >
             <ion-col col-4 no-padding>{{'STOCK' | translate}}</ion-col>
-            <ion-col col-8 no-padding>
-              {{product.stock_quantity}}
-            </ion-col>
+            <ion-col col-8 no-padding> {{product.stock_quantity}} </ion-col>
           </ion-row>
           <ion-row no-padding *ngIf="product.weight">
             <ion-col col-4 no-padding>{{'WEIGHT' | translate}}</ion-col>
-            <ion-col col-8 no-padding>
-              {{product.weight}}
-            </ion-col>
+            <ion-col col-8 no-padding> {{product.weight}} </ion-col>
           </ion-row>
           <ion-row no-padding *ngFor="let att of product.attributes">
             <ion-col col-4 no-padding>{{ att.name}}</ion-col>
@@ -619,7 +620,7 @@
           tappable
           icon-start
           class="accent-background"
-          style="color: black;"
+          style="color: black"
         >
           <ion-icon name="md-cart"></ion-icon>
           {{'ADD_TO_CART' | translate}}
@@ -632,7 +633,7 @@
           full
           icon-left
           class="accent-background"
-          style="color: black;"
+          style="color: black"
         >
           <ion-icon name="warning"></ion-icon>
           {{'OUT_OF_STOCK' | translate}}
