@@ -1,18 +1,22 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{"ORDER_RECEIVED" | translate}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
-  <ion-item text-wrap text-center *ngIf="orderDetails && (orderDetails.status=='processing' || orderDetails.status=='on-hold')">
+  <ion-item
+    text-wrap
+    text-center
+    *ngIf="orderDetails && (orderDetails.status=='processing' || orderDetails.status=='on-hold')"
+  >
     <h2>{{'ORDER_CREATED_THANKYOU_MESSAGE' | translate}}</h2>
   </ion-item>
-  <ion-item text-wrap text-center *ngIf="orderDetails && orderDetails.status==='failed'">
+  <ion-item
+    text-wrap
+    text-center
+    *ngIf="orderDetails && orderDetails.status==='failed'"
+  >
     <h2>{{'ORDER_FAILED' | translate}}</h2>
   </ion-item>
 
@@ -33,16 +37,41 @@
 
       <ion-item no-lines>
         <span>{{"DATE" | translate}}</span>
-        <span item-end>{{orderDetails.date_created | date:'MMM dd,yyyy hh:mma'}}</span>
+        <span item-end
+          >{{orderDetails.date_created | date:'MMM dd,yyyy hh:mma'}}</span
+        >
       </ion-item>
-      <ion-item no-lines *ngIf="orderDetails.shipping_lines && orderDetails.shipping_lines[0]">
+      <ion-item no-lines>
+        <span>{{"SHIPPING_CHARGE" | translate}}:</span>
+        <span item-end
+          ><span>{{orderDetails.currency_symbol}}</span
+          >{{orderDetails.shipping_total}}
+        </span>
+      </ion-item>
+      <ion-item
+        no-lines
+        *ngIf="orderDetails.fee_lines && orderDetails.fee_lines[0]"
+      >
+        <span>{{orderDetails.fee_lines[0].name}}</span>
+        <span item-end
+          ><span>{{orderDetails.currency_symbol}}</span
+          >{{orderDetails.fee_lines[0].total}}
+        </span>
+      </ion-item>
+      <ion-item
+        no-lines
+        *ngIf="orderDetails.shipping_lines && orderDetails.shipping_lines[0]"
+      >
         <span>{{"SHIPPING" | translate}}:</span>
         <span item-end>{{orderDetails.shipping_lines[0].method_title}} </span>
       </ion-item>
 
       <ion-item no-lines>
         <span>{{"PAYMENT_METHODS" | translate}}</span>
-        <span item-end text-capitalize>{{orderDetails.payment_method_title || orderDetails.payment_method}}</span>
+        <span item-end text-capitalize
+          >{{orderDetails.payment_method_title ||
+          orderDetails.payment_method}}</span
+        >
       </ion-item>
 
       <ion-item no-lines>
@@ -52,7 +81,10 @@
 
       <ion-item no-lines>
         <span>{{"TOTAL_AMOUNT" | translate}}</span>
-        <span item-end>{{calculatePrice(orderDetails) | money: settings.all.settings}} (inc. taxes) </span>
+        <span item-end
+          >{{calculatePrice(orderDetails) | money: settings.all.settings}} (inc.
+          taxes)
+        </span>
       </ion-item>
     </ion-list>
 
@@ -62,7 +94,10 @@
       </ion-list-header>
       <ion-item>
         <span>{{"NAME" | translate}}</span>
-        <span item-end>{{orderDetails.billing.first_name + " " +orderDetails.billing.last_name}}</span>
+        <span item-end
+          >{{orderDetails.billing.first_name + " "
+          +orderDetails.billing.last_name}}</span
+        >
       </ion-item>
       <ion-item>
         <span>{{"EMAIL" | translate}}</span>
@@ -76,8 +111,15 @@
   </div>
 </ion-content>
 <ion-footer>
-  <button ion-button full class="accent-background" (click)="goToHome()" *ngIf="(orderDetails && (orderDetails.status=='processing' || orderDetails.status=='on-hold'))">{{"CONTINUE_SHOPPING"
-    | translate}}</button>
+  <button
+    ion-button
+    full
+    class="accent-background"
+    (click)="goToHome()"
+    *ngIf="(orderDetails && (orderDetails.status=='processing' || orderDetails.status=='on-hold'))"
+  >
+    {{"CONTINUE_SHOPPING" | translate}}
+  </button>
   <!-- <ng-template #pay>
     <button ion-button full class="accent-background" (click)="payment()">{{"PROCEED_TO_PAYMENT" | translate}}</button>
   </ng-template> -->

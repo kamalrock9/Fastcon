@@ -173,12 +173,13 @@
           class="swatches-container-main"
         >
           <span class="swatches-title">{{attribute.name}}</span>
-          <div [ngSwitch]="attribute.options_type">
+          <div [ngSwitch]="attribute.name">
             <ng-container *ngSwitchCase="'color'">
               <ng-container *ngFor="let option of attribute.options">
                 <div
                   [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.slug?option.slug:option))?'swatches-selected':''"
                   class="swatches-container"
+                  [ngStyle]="{'border-color': option.slug}"
                   tappable
                   (tap)="onVariationChange(attribute.slug,option)"
                 >
@@ -200,7 +201,8 @@
                   <span
                     class="swatches"
                     [ngStyle]="{'background-color':option.value}"
-                  ></span>
+                    >{{option.name}}</span
+                  >
                 </div>
               </ng-container>
             </ng-container>

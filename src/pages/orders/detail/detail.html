@@ -9,11 +9,22 @@
     <ion-list>
       <ion-list-header no-padding no-lines>
         {{'PRODUCTS' | translate}}
-        <div item-end>{{data.line_items.length}} {{'ITEM' | translate}}&rlm;(s)</div>
+        <div item-end>
+          {{data.line_items.length}} {{'ITEM' | translate}}&rlm;(s)
+        </div>
       </ion-list-header>
-      <ion-item class="order_products" no-padding *ngFor="let x of data.line_items">
+      <ion-item
+        class="order_products"
+        no-padding
+        *ngFor="let x of data.line_items"
+      >
         <!-- <ion-thumbnail item-start> -->
-        <img-loader useImg [src]="x.img_src ? x.img_src : ''" item-start style="max-width:90px"></img-loader>
+        <img-loader
+          useImg
+          [src]="x.img_src ? x.img_src : ''"
+          item-start
+          style="max-width: 90px"
+        ></img-loader>
         <!-- </ion-thumbnail> -->
         <p [innerHTML]="x.name"></p>
         <div>
@@ -32,14 +43,19 @@
       </ion-list-header>
       <ion-item no-padding>
         Status
-        <span item-end>
-          {{data.status}}
-        </span>
+        <span item-end> {{data.status}} </span>
       </ion-item>
       <ion-item no-padding>
         {{"PAYMENT_METHODS" | translate}}
         <span item-end>
           {{data.payment_method_title || data.payment_method}}
+        </span>
+      </ion-item>
+      <ion-item no-padding *ngIf="data.fee_lines[0]">
+        {{data.fee_lines[0].name}}
+        <span item-end>
+          <span item-end>{{data.currency_symbol}}</span>
+          {{data.fee_lines[0].total}}
         </span>
       </ion-item>
       <ion-item no-padding *ngIf="data.shipping_lines[0]">
@@ -56,9 +72,7 @@
       </ion-item>
       <ion-item no-padding *ngFor="let c of data.coupon_lines">
         {{'COUPON' | translate}}( {{c.code}})
-        <span item-end>
-          {{c.discount | money: settings.all.settings}}
-        </span>
+        <span item-end> {{c.discount | money: settings.all.settings}} </span>
       </ion-item>
       <ion-item no-padding class="ord_total">
         {{'TOTAL' | translate}} Amount
@@ -68,7 +82,6 @@
       </ion-item>
     </ion-list>
   </div>
-
 
   <div class="order-details" padding-left padding-right>
     <ion-list no-lines>
@@ -87,7 +100,6 @@
           <p>{{data.billing.city}} - {{data.billing.postcode}}</p>
           <p>{{data.billing.state}} • {{data.billing.country}}</p>
         </div>
-
       </ion-item>
 
       <ion-item no-padding class="add_info">
@@ -107,7 +119,14 @@
   </div>
 </ion-content>
 <ion-footer *ngIf="data.status==='on-hold' || data.status==='pending'">
-  <button ion-button block default class="accent-background" tappable (click)="orderCancel()">
+  <button
+    ion-button
+    block
+    default
+    class="accent-background"
+    tappable
+    (click)="orderCancel()"
+  >
     Cancel Order
   </button>
 </ion-footer>

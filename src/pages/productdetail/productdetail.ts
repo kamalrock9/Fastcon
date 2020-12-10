@@ -88,6 +88,7 @@ export class ProductdetailPage {
         (res) => {
           if (res) {
             console.log(res);
+            console.log(JSON.stringify(res));
             this.product = res;
             this.events.publish("Loaded Product");
           } else {
@@ -253,7 +254,10 @@ export class ProductdetailPage {
     if (x.image.src) {
       this.product.extraImages = [x.image];
     }
-    this.product.extraImages = [...this.product.extraImages];
+    this.product.extraImages = [
+      ...this.product.extraImages,
+      ...x.woo_variation_gallery_images,
+    ];
     this.slider.slideTo(0);
     this.product.variation_id = x.id;
     this.product.price = x.price;
@@ -379,7 +383,7 @@ export class ProductdetailPage {
         product_id: this.product.id,
         attributes: this.product.attr,
       };
-      console.log(data);
+      console.log(JSON.stringify(data));
       this.loadVariation(data);
     }
   }

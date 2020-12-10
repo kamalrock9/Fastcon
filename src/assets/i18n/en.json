@@ -82,6 +82,7 @@
   "ADDRESS": "Address",
   "BILLING": "Billing",
   "SHIPPING": "Shipping",
+  "SHIPPING_CHARGE": "Shipping Charge",
   "NO_ADDRESS_SAVED": "You have not saved any address yet.",
   "ADDRESS_USE": "Address will be used on the checkout page by default.",
   "TOS": "About us",
