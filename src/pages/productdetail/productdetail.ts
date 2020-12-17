@@ -41,6 +41,8 @@ export class ProductdetailPage {
   dir: string;
   slidesPerView: number = 2.5;
   load: any;
+  color: "";
+  size: "";
 
   constructor(
     public navCtrl: NavController,
@@ -78,12 +80,11 @@ export class ProductdetailPage {
       console.log("Test");
       this.setupProduct();
     });
+    console.log("text");
     console.log(this.navParams.data.params);
-    if (
-      this.navParams.data.params &&
-      this.navParams.data.params.isReferedByPush
-    ) {
+    if (this.navParams.data.params) {
       console.log("Push");
+      console.log(this.navParams.data.params.id);
       this.WC.getProductById(null, this.navParams.data.params.id).subscribe(
         (res) => {
           if (res) {
@@ -184,7 +185,6 @@ export class ProductdetailPage {
       this.product.grouped_products.length > 0 &&
       !this.product.grouped_products[0].name
     ) {
-      console.log(this.product.grouped_products);
       this.WC.getProductById(this.product.grouped_products.join()).subscribe(
         (x: any) => {
           x.map((element) => {
@@ -258,6 +258,7 @@ export class ProductdetailPage {
       ...this.product.extraImages,
       ...x.woo_variation_gallery_images,
     ];
+    this.product.variationImages = [...x.woo_variation_gallery_images];
     this.slider.slideTo(0);
     this.product.variation_id = x.id;
     this.product.price = x.price;
@@ -368,24 +369,27 @@ export class ProductdetailPage {
   }
 
   onVariationChange(key, option) {
+    console.log(option);
+    if (option.slug == "pa_color") {
+      this.color = option.name;
+    } else {
+      this.size = option.name;
+    }
     if (this.product.attr[key] == (option.slug ? option.slug : option)) {
       return;
     }
     this.product.attr = {
       ...this.product.attr,
-      [key]: option.slug ? option.slug : option,
+      [key]: option.name ? option.name : option.slug,
     };
-    if (
-      Object.keys(this.product.attr).length ==
-      this.product.var_attributes.length
-    ) {
-      let data = {
-        product_id: this.product.id,
-        attributes: this.product.attr,
-      };
-      console.log(JSON.stringify(data));
-      this.loadVariation(data);
-    }
+    console.log(this.product.attr);
+
+    let data = {
+      product_id: this.product.id,
+      attributes: this.product.attr,
+    };
+    console.log(JSON.stringify(data));
+    this.loadVariation(data);
   }
 
   addToCart(isBuyNow?) {

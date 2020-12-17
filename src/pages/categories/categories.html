@@ -1,17 +1,20 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{'CATEGORIES' | translate}}</ion-title>
     <ion-buttons end>
-        <button mode="md" ion-button clear icon-only (click)="showSearch()">
-            <ion-icon name="md-search"></ion-icon>
-          </button> 
+      <button mode="md" ion-button clear icon-only (click)="showSearch()">
+        <ion-icon name="md-search"></ion-icon>
+      </button>
       <button mode="md" ion-button icon-only (click)="goTo('WishlistPage')">
-        <ion-badge *ngIf="wishlist.total && wishlist.total > 0">{{wishlist.total}}</ion-badge>
+        <ion-badge *ngIf="wishlist.total && wishlist.total > 0"
+          >{{wishlist.total}}</ion-badge
+        >
         <ion-icon name="md-heart"></ion-icon>
       </button>
       <button mode="md" ion-button clear icon-only (click)="goTo('CartPage')">
-        <ion-badge *ngIf="settings.all && settings.cartCount > 0">{{settings.cartCount}}</ion-badge>
+        <ion-badge *ngIf="settings.all && settings.cartCount > 0"
+          >{{settings.cartCount}}</ion-badge
+        >
         <ion-icon name="md-cart"></ion-icon>
       </button>
     </ion-buttons>
@@ -19,26 +22,106 @@
 </ion-header>
 
 <ion-content no-padding>
+  <div class="tab_btn">
+    <ul no-padding no-margin>
+      <ng-container *ngFor="let item of categories;let i=index">
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          "
+          [ngClass]="{'active': item.isExpanded}"
+          (click)="gotoSubCategory(item)"
+        >
+          <img
+            [src]="item.image ? item.image.src : 'https://ppc.tools/wp-content/themes/ppctools/img/no-thumbnail.jpg'"
+            style="width: 40px; height: 40px; margin-top: 20px"
+          />
+          <p class="tabs" tappable>{{item.name.replace('amp;', '')}}</p>
+        </div>
+      </ng-container>
+    </ul>
+  </div>
+
+  <div class="tab_content">
+    <ul no-padding no-margin>
+      <ng-container *ngFor="let item of subCategories;">
+        <div
+          style="
+            padding: 10px 5px;
+            background: #fff;
+            margin: 5px;
+            border-radius: 4px;
+          "
+        >
+          <!-- <img
+            [src]="item.image ? item.image.src : 'https://ppc.tools/wp-content/themes/ppctools/img/no-thumbnail.jpg'"
+            useImg
+            style="width: 60px; height: 60px"
+          /> -->
+          <p
+            class="tabs"
+            style="margin: 0; font-weight: 700; padding-left: 10px"
+          >
+            {{item.name.replace('amp;', '')}}
+          </p>
+          <div style="display: flex; flex-wrap: wrap">
+            <ng-container *ngIf="item.children.length>0">
+              <div
+                *ngFor="let subItem of item.children;"
+                style="padding: 10px 0 5px; width: 33.33%; text-align: center"
+                (click)="goTo('ProductPage',item)"
+              >
+                <img
+                  [src]="subItem.image ? subItem.image.src : 'https://ppc.tools/wp-content/themes/ppctools/img/no-thumbnail.jpg'"
+                  useImg
+                  style="width: 60px; height: 60px"
+                />
+                <p class="tabs" style="margin: 0">
+                  {{subItem.name.replace('amp;', '')}}
+                </p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <!-- <ng-container *ngFor="let item of subSubCategories;">
+        <div
+          style="padding: 20px 5px 5px; text-align: center; width: 33.33%"
+          (click)="goTo('ProductPage',item)"
+        >
+          <img
+            [src]="item.image ? item.image.src : 'https://ppc.tools/wp-content/themes/ppctools/img/no-thumbnail.jpg'"
+            useImg
+            style="width: 60px; height: 60px"
+          />
+          <p class="tabs" style="margin: 0">{{item.name}}</p>
+        </div>
+      </ng-container> -->
+    </ul>
+  </div>
 
   <!-- <div class="loader_outer" *ngIf="!nodes">
     <div class="loader"></div>
   </div> -->
-  <ion-list class="m-n" *ngIf="!nodes">
+  <!-- <ion-list class="m-n" *ngIf="!nodes">
     <ion-item no-lines *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]">
       <ion-avatar item-start>
         <skeleton-item no-animated height="36px" width="36px"></skeleton-item>
       </ion-avatar>
       <skeleton-item no-animated width="67%"></skeleton-item>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
-  <tree-root [nodes]="nodes" class="treeview" *ngIf="nodes">
+  <!-- <tree-root [nodes]="nodes" class="treeview" *ngIf="nodes">
     <ng-template #treeNodeWrapperTemplate let-node let-index="index">
-      <ion-item no-lines class="node-wrapper" [style.padding-start]="node.getNodePadding()">
-        <!-- <ion-thumbnail item-start> -->
-        <img-loader class="thumb" [src]="node.data.image ? node.data.image.src : ''" useImg item-start></img-loader>
-        <!-- </ion-thumbnail> -->
-        <tree-node-expander [node]="node" item-end>
+      <ion-item no-lines class="node-wrapper" [style.padding-start]="node.getNodePadding()"> -->
+  <!-- <ion-thumbnail item-start> -->
+  <!-- <img-loader class="thumb" [src]="node.data.image ? node.data.image.src : ''" useImg item-start></img-loader> -->
+  <!-- </ion-thumbnail> -->
+  <!-- <tree-node-expander [node]="node" item-end>
         </tree-node-expander>
         <div class="node-content-wrapper" [class.node-content-wrapper-active]="node.isActive"
           [class.node-content-wrapper-focused]="node.isFocused" (click)="node.mouseAction('click', $event)" (dblclick)="node.mouseAction('dblClick', $event)"
@@ -50,5 +133,5 @@
         </div>
       </ion-item>
     </ng-template>
-  </tree-root>
+  </tree-root> -->
 </ion-content>

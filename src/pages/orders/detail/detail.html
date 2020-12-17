@@ -86,6 +86,23 @@
   <div class="order-details" padding-left padding-right>
     <ion-list no-lines>
       <ion-list-header no-padding no-lines no-margin>
+        Order Track
+      </ion-list-header>
+      <div>
+        <ul class="list-unstyled multi-steps">
+          <li [class]="page=='placed'?'is-active':''">Placed</li>
+          <li [class]="page=='accepted'?'is-active':''">Accepted</li>
+          <li [class]="page=='picked'?'is-active':''">Picked</li>
+          <li [class]="page=='shipped'?'is-active':''">Shipped</li>
+          <li [class]="page=='delivered'?'is-active':''">Delivered</li>
+        </ul>
+      </div>
+    </ion-list>
+  </div>
+
+  <div class="order-details" padding-left padding-right>
+    <ion-list no-lines>
+      <ion-list-header no-padding no-lines no-margin>
         {{'ADDRESS_INFORMATION' | translate}}
       </ion-list-header>
       <ion-item no-padding class="add_info">

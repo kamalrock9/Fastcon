@@ -149,9 +149,9 @@
       *ngIf="product.variations.length > 0 && product.attributes.length > 0"
     >
       <ion-list mode="md">
-        <ion-list-header no-padding mode="md">
+        <!-- <ion-list-header no-padding mode="md">
           {{'VARIATION' | translate}}
-        </ion-list-header>
+        </ion-list-header> -->
         <!--<ion-row>
           <ion-col col-12 no-padding *ngFor="let attribute of product.var_attributes;">
             <ion-item no-padding class="no-lines">
@@ -173,41 +173,41 @@
           class="swatches-container-main"
         >
           <span class="swatches-title">{{attribute.name}}</span>
-          <div [ngSwitch]="attribute.name">
-            <ng-container *ngSwitchCase="'color'">
-              <ng-container *ngFor="let option of attribute.options">
+          <div [ngSwitch]="attribute.options_type">
+            <!-- <ng-container *ngSwitchCase="'color'">
+              <ng-container *ngFor="let option of product.variationImages">
                 <div
                   [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.slug?option.slug:option))?'swatches-selected':''"
-                  class="swatches-container"
-                  [ngStyle]="{'border-color': option.slug}"
+                  class="swatches-container swatches-container-img"
                   tappable
-                  (tap)="onVariationChange(attribute.slug,option)"
                 >
-                  <span
-                    class="swatches"
-                    [ngStyle]="{'background-color':option.value}"
-                  ></span>
+                  <img [src]="option.src" class="swatches" />
                 </div>
               </ng-container>
-            </ng-container>
-            <ng-container *ngSwitchCase="'size'">
-              <ng-container *ngFor="let option of attribute.options">
+              <div></div>
+            </ng-container> -->
+            <ng-container *ngSwitchCase="'color'">
+              <div style="display: flex">
+                <p style="font-weight: 700; margin-right: 8px">Colour :</p>
+                <p>{{color}}</p>
+              </div>
+              <ng-container *ngFor="let option of attribute.value">
                 <div
-                  [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.slug?option.slug:option))?'swatches-selected':''"
-                  class="swatches-container"
+                  [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.name?option.name:option))?'swatches-selected':''"
+                  class="swatches-container swatches-container-img"
                   tappable
                   (tap)="onVariationChange(attribute.slug,option)"
                 >
-                  <span
-                    class="swatches"
-                    [ngStyle]="{'background-color':option.value}"
-                    >{{option.name}}</span
-                  >
+                  <img [src]="option.src[0]" class="swatches" />
+                  <!-- <span
+                      class="swatches"
+                      [ngStyle]="{'background-color':option.value}"
+                    ></span> -->
                 </div>
               </ng-container>
             </ng-container>
             <ng-container *ngSwitchCase="'image'">
-              <ng-container *ngFor="let option of attribute.options">
+              <ng-container *ngFor="let option of attribute.value">
                 <div
                   [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.slug?option.slug:option))?'swatches-selected':''"
                   class="swatches-container swatches-container-img"
@@ -219,9 +219,13 @@
               </ng-container>
             </ng-container>
             <ng-container *ngSwitchDefault>
-              <ng-container *ngFor="let option of attribute.options">
+              <div style="display: flex">
+                <p style="font-weight: 700; margin-right: 8px">Size :</p>
+                <p>{{size}}</p>
+              </div>
+              <ng-container *ngFor="let option of attribute.value">
                 <div
-                  [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.slug?option.slug:option))?'swatches-selected':''"
+                  [ngClass]="(product.attr[attribute.slug] && product.attr[attribute.slug]==(option.name?option.name:option))?'swatches-selected':''"
                   class="swatches-container swatches-container-default"
                   [ngStyle]="{'border-radius':(option.value||option.name||option).length>4?'3px':'50%'}"
                   tappable

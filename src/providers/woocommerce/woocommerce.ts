@@ -95,6 +95,8 @@ export class WooCommerceProvider {
     //Multiple ids suppoerted(include=1,2,3,4,5) or single id supported(id=1)
     let incl = include ? "?include=" + include : "";
     let i = id ? "?id=" + id : "";
+    console.log(i);
+    console.log(this.RestURL + "get-products-by-id" + incl + i);
     return this.http.get(this.RestURL + "get-products-by-id" + incl + i);
   }
   search(search, per_page?) {
@@ -296,5 +298,10 @@ export class WooCommerceProvider {
   }
   getProductByUrl(url) {
     return this.http.get(this.RestURL + "get-product-by-url?url=" + url);
+  }
+  getOrderTrackData(order_id) {
+    return this.http.get(
+      this.RestURL + "order/track/delivery?order_id=" + order_id
+    );
   }
 }

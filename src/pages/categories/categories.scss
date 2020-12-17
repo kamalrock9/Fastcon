@@ -4,12 +4,120 @@ page-categories {
     display: flex;
     align-items: center;
   }
-  .thumb{
-    img{
-     max-width:36px;
+  .thumb {
+    img {
+      max-width: 36px;
     }
   }
   .treeview .node-wrapper {
     padding: 10px 10px 0px;
-  } 
+  }
+  .scroll-content {
+    background-color: #eceef5;
+  }
+  .tab_btn {
+    width: 30%;
+    height: 100%;
+    @include float(start);
+    //background: #eceef5;
+    overflow-y: auto;
+    margin-top: 4.5px;
+    background: white;
+
+    ul {
+      //margin-top:6px;
+
+      .tabs {
+        list-style: none;
+        // width: 100%;
+        // padding: 15px;
+        font-size: 15px;
+        font-weight: 500;
+        // @include text-align("start");
+        text-transform: capitalize;
+        // margin-bottom: 1px;
+        cursor: pointer;
+        outline: none;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .active {
+        color: #f4579c;
+        background: #eceef5;
+        border-left: 4px solid #f4579c;
+      }
+    }
+
+    .tab_btn_inner {
+      height: auto;
+    }
+  }
+
+  .tab_content {
+    background: #eceef5;
+    width: calc(100% - 30%);
+    height: 100%;
+    @include float(end);
+    overflow-y: scroll;
+
+    .item {
+      .checkbox {
+        @include margin(null, 15px, null, null);
+        .checkbox-icon.checkbox-checked {
+          border-color: var(--primary_color);
+          background-color: var(--primary_color);
+        }
+      }
+
+      .radio {
+        .radio-checked {
+          border-color: var(--primary_color);
+
+          .radio-inner {
+            background-color: var(--primary_color);
+          }
+        }
+      }
+    }
+
+    .item-radio-checked.item .label {
+      color: var(--primary_color);
+      font-weight: 600;
+    }
+
+    .item.item-radio {
+      .item-inner {
+        flex-direction: row-reverse;
+      }
+    }
+
+    .active {
+      display: block;
+    }
+
+    .disable {
+      display: none;
+    }
+  }
+
+  .tab_content_div {
+    &:not(:first-child) {
+      overflow-y: auto;
+      height: 100%;
+    }
+  }
+
+  ion-input {
+    border: 1px solid #e2e1e1;
+    border-radius: 2px;
+    margin-top: 8px;
+  }
+
+  input.text-input {
+    @include margin(0px, 0px, 0px, null);
+    @include margin(null, null, null, 8px !important);
+    font-size: 1.4rem !important;
+    width: calc(100% - 16px) !important;
+  }
 }
