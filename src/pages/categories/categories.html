@@ -72,7 +72,7 @@
               <div
                 *ngFor="let subItem of item.children;"
                 style="padding: 10px 0 5px; width: 33.33%; text-align: center"
-                (click)="goTo('ProductPage',item)"
+                (click)="goTo('ProductPage',subItem)"
               >
                 <img
                   [src]="subItem.image ? subItem.image.src : 'https://ppc.tools/wp-content/themes/ppctools/img/no-thumbnail.jpg'"

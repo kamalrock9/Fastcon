@@ -343,37 +343,218 @@
 
     <!--Custom Layout-->
     <div class="flipkart">
-      <ng-container *ngFor="let section of layout.section">
-        <div class="one-grid-category" *ngIf="section.grid_typ=='1'">
-          <div
-            class="productimage"
-            tappable
-            (click)="goTo('ProductPage', section.layout_data[0])"
-          >
-            <img [src]="section.layout_data[0].url" />
-          </div>
-        </div>
-
-        <div class="two-grid-category" *ngIf="section.grid_typ=='2'">
-          <ion-row>
-            <ion-col col-6 *ngFor="let layout_data of section.layout_data">
-              <div
-                class="productimage"
-                tappable
-                (click)="goTo('ProductPage', layout_data)"
-              >
-                <img [src]="layout_data.url" />
-              </div>
-            </ion-col>
-          </ion-row>
-        </div>
-
-        <div class="three-grid-category" *ngIf="section.grid_typ=='3'">
+      <ng-container *ngFor="let section of layout.section_banners">
+        <div
+          class="one-grid-category"
+          [ngStyle]="{'background':section.background_color}"
+          *ngIf="section.layout_type=='1' && (section.bg_img != '' && (section.background_color != '' || section.background_color == '' ))  "
+          [style.backgroundImage]="'url(' + section.bg_img + ')'"
+          style="background-repeat: no-repeat"
+        >
           <div class="vewall_area">
-            <h1>{{section.section_title}}<br /></h1>
+            <h1 [ngStyle]="{'color':section.title_color}">
+              {{section.title}}<br />
+            </h1>
             <button
               tappable
               (click)="goTo('ProductPage', { id: section.layout_main })"
+              [ngStyle]="{'background':section.view_more_bg_color,'color':section.view_more_text_color}"
+            >
+              view all
+            </button>
+          </div>
+          <div class="productarea">
+            <ion-row>
+              <ion-col>
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', section.banner[0])"
+                >
+                  <img [src]="section.banner[0].banner_url" />
+                  <p
+                    [ngStyle]="{'color':section.banner[0].item_title.color,
+                  'font-weight':section.banner[0].item_title.font_weight,
+                  'font-size':section.banner[0].item_title.font_size,
+                  'font-style':section.banner[0].item_title.style}"
+                  >
+                    {{section.banner[0].item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':section.banner[0].item_sub_title.color,
+                  'font-weight':section.banner[0].item_sub_title.font_weight,
+                  'font-size':section.banner[0].item_sub_title.font_size,
+                  'font-style':section.banner[0].item_sub_title.style}"
+                  >
+                    {{section.banner[0].item_sub_title.text}}
+                  </h3>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <div
+          class="one-grid-category"
+          [ngStyle]="{'background':section.background_color}"
+          *ngIf="section.layout_type=='1'  && section.bg_img == '' "
+        >
+          <div class="vewall_area">
+            <h1 [ngStyle]="{'color':section.title_color}">
+              {{section.title}}<br />
+            </h1>
+            <button
+              tappable
+              (click)="goTo('ProductPage', { id: section.layout_main })"
+              [ngStyle]="{'background':section.view_more_bg_color,'color':section.view_more_text_color}"
+            >
+              view all
+            </button>
+          </div>
+          <div class="productarea">
+            <ion-row>
+              <ion-col>
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', section.banner[0])"
+                >
+                  <img [src]="section.banner[0].banner_url" />
+                  <p
+                    [ngStyle]="{'color':section.banner[0].item_title.color,
+                  'font-weight':section.banner[0].item_title.font_weight,
+                  'font-size':section.banner[0].item_title.font_size,
+                  'font-style':section.banner[0].item_title.style}"
+                  >
+                    {{section.banner[0].item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':section.banner[0].item_sub_title.color,
+                  'font-weight':section.banner[0].item_sub_title.font_weight,
+                  'font-size':section.banner[0].item_sub_title.font_size,
+                  'font-style':section.banner[0].item_sub_title.style}"
+                  >
+                    {{section.banner[0].item_sub_title.text}}
+                  </h3>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <div
+          class="two-grid-category"
+          [ngStyle]="{'background':section.background_color}"
+          *ngIf="section.layout_type=='2' && (section.bg_img != '' && (section.background_color != '' || section.background_color == '' )) "
+          [style.backgroundImage]="'url(' + section.bg_img + ')'"
+          style="background-repeat: no-repeat"
+        >
+          <div class="vewall_area">
+            <h1 [ngStyle]="{'color':section.title_color}">
+              {{section.title}}<br />
+            </h1>
+            <button
+              tappable
+              (click)="goTo('ProductPage', { id: section.layout_main })"
+              [ngStyle]="{'background':section.view_more_bg_color,'color':section.view_more_text_color}"
+            >
+              view all
+            </button>
+          </div>
+          <div class="productarea">
+            <ion-row>
+              <ion-col col-6 *ngFor="let layout_data of section.banner">
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', layout_data)"
+                >
+                  <img [src]="layout_data.banner_url" />
+                  <p
+                    [ngStyle]="{'color':layout_data.item_title.color,
+                  'font-weight':layout_data.item_title.font_weight,
+                  'font-size':layout_data.item_title.font_size,
+                  'font-style':layout_data.item_title.style}"
+                  >
+                    {{layout_data.item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':layout_data.item_sub_title.color,
+                  'font-weight':layout_data.item_sub_title.font_weight,
+                  'font-size':layout_data.item_sub_title.font_size,
+                  'font-style':layout_data.item_sub_title.style}"
+                  >
+                    {{layout_data.item_sub_title.text}}
+                  </h3>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <div
+          class="two-grid-category"
+          [ngStyle]="{'background':section.background_color}"
+          *ngIf="section.layout_type=='2' && section.bg_img == '' "
+        >
+          <div class="vewall_area">
+            <h1 [ngStyle]="{'color':section.title_color}">
+              {{section.title}}<br />
+            </h1>
+            <button
+              tappable
+              (click)="goTo('ProductPage', { id: section.layout_main })"
+              [ngStyle]="{'background':section.view_more_bg_color,'color':section.view_more_text_color}"
+            >
+              view all
+            </button>
+          </div>
+          <div class="productarea">
+            <ion-row>
+              <ion-col col-6 *ngFor="let layout_data of section.banner">
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', layout_data)"
+                >
+                  <img [src]="layout_data.banner_url" />
+                  <p
+                    [ngStyle]="{'color':layout_data.item_title.color,
+                  'font-weight':layout_data.item_title.font_weight,
+                  'font-size':layout_data.item_title.font_size,
+                  'font-style':layout_data.item_title.style}"
+                  >
+                    {{layout_data.item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':layout_data.item_sub_title.color,
+                  'font-weight':layout_data.item_sub_title.font_weight,
+                  'font-size':layout_data.item_sub_title.font_size,
+                  'font-style':layout_data.item_sub_title.style}"
+                  >
+                    {{layout_data.item_sub_title.text}}
+                  </h3>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <div
+          class="three-grid-category"
+          [ngStyle]="{'background':section.background_color}"
+          *ngIf="section.layout_type=='3'&& (section.bg_img != '' && (section.background_color != '' || section.background_color == '' )) "
+          [style.backgroundImage]="'url(' + section.bg_img + ')'"
+          style="background-repeat: no-repeat"
+        >
+          <div class="vewall_area">
+            <h1 [ngStyle]="{'color':section.title_color}">
+              {{section.title}}<br />
+            </h1>
+            <button
+              tappable
+              (click)="goTo('ProductPage', { id: section.layout_main })"
+              [ngStyle]="{'background':section.view_more_bg_color,'color':section.view_more_text_color}"
             >
               view all
             </button>
@@ -384,9 +565,25 @@
                 <div
                   class="productimage"
                   tappable
-                  (click)="goTo('ProductPage', section.layout_data[0])"
+                  (click)="goTo('ProductPage', section.banner[0])"
                 >
-                  <img [src]="section.layout_data[0].url" />
+                  <img [src]="section.banner[0].banner_url" />
+                  <p
+                    [ngStyle]="{'color':section.banner[0].item_title.color,
+                  'font-weight':section.banner[0].item_title.font_weight,
+                  'font-size':section.banner[0].item_title.font_size,
+                  'font-style':section.banner[0].item_title.style}"
+                  >
+                    {{section.banner[0].item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':section.banner[0].item_sub_title.color,
+                  'font-weight':section.banner[0].item_sub_title.font_weight,
+                  'font-size':section.banner[0].item_sub_title.font_size,
+                  'font-style':section.banner[0].item_sub_title.style}"
+                  >
+                    {{section.banner[0].item_sub_title.text}}
+                  </h3>
                 </div>
               </ion-col>
 
@@ -394,41 +591,231 @@
                 <div
                   class="productimage"
                   tappable
-                  (click)="goTo('ProductPage', section.layout_data[1])"
+                  (click)="goTo('ProductPage', section.banner[1])"
                 >
-                  <img [src]="section.layout_data[1].url" />
+                  <img [src]="section.banner[1].banner_url" />
+                  <p
+                    [ngStyle]="{'color':section.banner[1].item_title.color,
+                  'font-weight':section.banner[1].item_title.font_weight,
+                  'font-size':section.banner[1].item_title.font_size,
+                  'font-style':section.banner[1].item_title.style}"
+                  >
+                    {{section.banner[1].item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':section.banner[1].item_sub_title.color,
+                  'font-weight':section.banner[1].item_sub_title.font_weight,
+                  'font-size':section.banner[1].item_sub_title.font_size,
+                  'font-style':section.banner[1].item_sub_title.style}"
+                  >
+                    {{section.banner[1].item_sub_title.text}}
+                  </h3>
                 </div>
                 <div
                   class="productimage"
                   tappable
-                  (click)="goTo('ProductPage', section.layout_data[2])"
+                  (click)="goTo('ProductPage', section.banner[2])"
                 >
-                  <img [src]="section.layout_data[2].url" />
+                  <img [src]="section.banner[2].banner_url" />
+                  <p
+                    [ngStyle]="{'color':section.banner[2].item_title.color,
+                  'font-weight':section.banner[2].item_title.font_weight,
+                  'font-size':section.banner[2].item_title.font_size,
+                  'font-style':section.banner[2].item_title.style}"
+                  >
+                    {{section.banner[2].item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':section.banner[2].item_sub_title.color,
+                  'font-weight':section.banner[2].item_sub_title.font_weight,
+                  'font-size':section.banner[2].item_sub_title.font_size,
+                  'font-style':section.banner[2].item_sub_title.style}"
+                  >
+                    {{section.banner[2].item_sub_title.text}}
+                  </h3>
                 </div>
               </ion-col>
             </ion-row>
           </div>
         </div>
 
-        <div class="four-grid-category" *ngIf="section.grid_typ=='4'">
+        <div
+          class="three-grid-category"
+          [ngStyle]="{'background':section.background_color}"
+          *ngIf="section.layout_type=='3' && section.bg_img == ''"
+        >
           <div class="vewall_area">
-            <h1>{{section.section_title}}<br /></h1>
+            <h1 [ngStyle]="{'color':section.title_color}">
+              {{section.title}}<br />
+            </h1>
             <button
               tappable
               (click)="goTo('ProductPage', { id: section.layout_main })"
+              [ngStyle]="{'background':section.view_more_bg_color,'color':section.view_more_text_color}"
             >
               view all
             </button>
           </div>
           <div class="productarea">
             <ion-row>
-              <ion-col col-6 *ngFor="let layout_data of section.layout_data">
+              <ion-col col-8>
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', section.banner[0])"
+                >
+                  <img [src]="section.banner[0].banner_url" />
+                  <p
+                    [ngStyle]="{'color':section.banner[0].item_title.color,
+                  'font-weight':section.banner[0].item_title.font_weight,
+                  'font-size':section.banner[0].item_title.font_size,
+                  'font-style':section.banner[0].item_title.style}"
+                  >
+                    {{section.banner[0].item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':section.banner[0].item_sub_title.color,
+                  'font-weight':section.banner[0].item_sub_title.font_weight,
+                  'font-size':section.banner[0].item_sub_title.font_size,
+                  'font-style':section.banner[0].item_sub_title.style}"
+                  >
+                    {{section.banner[0].item_sub_title.text}}
+                  </h3>
+                </div>
+              </ion-col>
+
+              <ion-col col-4>
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', section.banner[1])"
+                >
+                  <img [src]="section.banner[1].banner_url" />
+                  <p
+                    [ngStyle]="{'color':section.banner[1].item_title.color,
+                  'font-weight':section.banner[1].item_title.font_weight,
+                  'font-size':section.banner[1].item_title.font_size,
+                  'font-style':section.banner[1].item_title.style}"
+                  >
+                    {{section.banner[1].item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':section.banner[1].item_sub_title.color,
+                  'font-weight':section.banner[1].item_sub_title.font_weight,
+                  'font-size':section.banner[1].item_sub_title.font_size,
+                  'font-style':section.banner[1].item_sub_title.style}"
+                  >
+                    {{section.banner[1].item_sub_title.text}}
+                  </h3>
+                </div>
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', section.banner[2])"
+                >
+                  <img [src]="section.banner[2].banner_url" />
+                  <p
+                    [ngStyle]="{'color':section.banner[2].item_title.color,
+                  'font-weight':section.banner[2].item_title.font_weight,
+                  'font-size':section.banner[2].item_title.font_size,
+                  'font-style':section.banner[2].item_title.style}"
+                  >
+                    {{section.banner[2].item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':section.banner[2].item_sub_title.color,
+                  'font-weight':section.banner[2].item_sub_title.font_weight,
+                  'font-size':section.banner[2].item_sub_title.font_size,
+                  'font-style':section.banner[2].item_sub_title.style}"
+                  >
+                    {{section.banner[2].item_sub_title.text}}
+                  </h3>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <div
+          *ngIf="section.layout_type=='4' && (section.bg_img != '' && (section.background_color != '' || section.background_color == '' )) "
+          class="four-grid-category"
+          [style.backgroundImage]="'url(' + section.bg_img + ')'"
+          style="background-repeat: no-repeat"
+        >
+          <!-- <img [src]="section.bg_img" /> -->
+          <div class="vewall_area">
+            <h1 [ngStyle]="{'color':section.title_color}">
+              {{section.title}}<br />
+            </h1>
+            <button
+              tappable
+              (click)="goTo('ProductPage', { id: section.layout_main })"
+              [ngStyle]="{'background':section.view_more_bg_color,'color':section.view_more_text_color}"
+            >
+              view all
+            </button>
+          </div>
+          <div class="productarea">
+            <ion-row>
+              <ion-col col-6 *ngFor="let layout_data of section.banner">
                 <div
                   class="productimage"
                   tappable
                   (click)="goTo('ProductPage', layout_data)"
                 >
-                  <img [src]="layout_data.url" />
+                  <img [src]="layout_data.banner_url" />
+                  <p
+                    [ngStyle]="{'color':layout_data.item_title.color,'font-weight':layout_data.item_title.font_weight,'font-size':layout_data.item_title.font_size,'font-style':layout_data.item_title.style}"
+                  >
+                    {{layout_data.item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':layout_data.item_sub_title.color,'font-weight':layout_data.item_sub_title.font_weight,'font-size':layout_data.item_sub_title.font_size,'font-style':layout_data.item_sub_title.style}"
+                  >
+                    {{layout_data.item_sub_title.text}}
+                  </h3>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <div
+          class="four-grid-category"
+          [ngStyle]="{'background':section.background_color}"
+          *ngIf="section.layout_type=='4' && section.bg_img == ''"
+        >
+          <div class="vewall_area">
+            <h1 [ngStyle]="{'color':section.title_color}">
+              {{section.title}}<br />
+            </h1>
+            <button
+              tappable
+              (click)="goTo('ProductPage', { id: section.layout_main })"
+              [ngStyle]="{'background':section.view_more_bg_color,'color':section.view_more_text_color}"
+            >
+              view all
+            </button>
+          </div>
+          <div class="productarea">
+            <ion-row>
+              <ion-col col-6 *ngFor="let layout_data of section.banner">
+                <div
+                  class="productimage"
+                  tappable
+                  (click)="goTo('ProductPage', layout_data)"
+                >
+                  <img [src]="layout_data.banner_url" />
+                  <p
+                    [ngStyle]="{'color':layout_data.item_title.color,'font-weight':layout_data.item_title.font_weight,'font-size':layout_data.item_title.font_size,'font-style':layout_data.item_title.style}"
+                  >
+                    {{layout_data.item_title.text}}
+                  </p>
+                  <h3
+                    [ngStyle]="{'color':layout_data.item_sub_title.color,'font-weight':layout_data.item_sub_title.font_weight,'font-size':layout_data.item_sub_title.font_size,'font-style':layout_data.item_sub_title.style}"
+                  >
+                    {{layout_data.item_sub_title.text}}
+                  </h3>
                 </div>
               </ion-col>
             </ion-row>

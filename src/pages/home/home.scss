@@ -287,11 +287,12 @@ page-home {
 
     .four-grid-category {
       // background: linear-gradient(rgb(40, 116, 240), rgb(40, 116, 240));
-      background-color: #a5e4db;
+      //  background-color: #a5e4db;
+      background-color: url("../assets/imgs/login-background.jpg");
       width: 100%;
       height: auto;
-      padding: 15px 16px 0px;
-      margin-bottom: 16px;
+      padding: 15px 16px 26px;
+      // margin-bottom: 16px;
 
       .vewall_area {
         width: 100%;
@@ -361,6 +362,17 @@ page-home {
           .productimage {
             width: 100%;
             margin: 0 auto;
+            text-align: center;
+            padding: 24px 0;
+            img {
+              width: 140px;
+            }
+            p {
+              margin: 5px 0;
+            }
+            h3 {
+              font-size: 18px;
+            }
           }
         }
       }
@@ -389,7 +401,105 @@ page-home {
         }
         h1 {
           font-size: 15px;
-          color: #000;
+          color: #fff;
+        }
+      }
+      button {
+        background: #2ca032;
+        color: white;
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+        text-transform: capitalize;
+        box-shadow: none;
+      }
+      .productarea {
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0 1px 1.5px 0px rgba(0, 0, 0, 0.16);
+        transform: translate(0, 8px);
+        .col:first-child {
+          display: flex;
+          align-items: center;
+          img {
+            width: auto;
+          }
+        }
+        .col {
+          border: 1px solid #f0f0f0 !important;
+          padding: 0;
+
+          .productcontent {
+            text-align: center;
+            padding-top: 7px;
+            padding-bottom: 5px;
+            span {
+              font-size: 13px;
+              color: #262626;
+              line-height: 16px;
+              margin-top: 8px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+              overflow: hidden;
+              text-align: center;
+            }
+            p {
+              font-size: 14px;
+              color: #388e3c;
+              line-height: 24px;
+              margin-top: 0px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+              overflow: hidden;
+              text-align: center;
+              margin-bottom: 0px;
+            }
+          }
+          .productimage {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 10px 10px;
+            img {
+              width: 140px;
+            }
+            p {
+              margin: 5px 0;
+            }
+            h3 {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+    .two-grid-category {
+      background: #fff;
+      width: 100%;
+      height: auto;
+      padding: 15px 0 0px;
+      //margin-bottom: 23px;
+
+      .vewall_area {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0px;
+        padding: 19px 16px 0;
+        text-transform: capitalize;
+        p {
+          font-size: 14px;
+          margin-top: 3px;
+          color: #878787;
+          margin-bottom: 0px;
+        }
+        h1 {
+          font-size: 15px;
+          color: #fff;
         }
       }
       button {
@@ -441,11 +551,116 @@ page-home {
           .productimage {
             width: 100%;
             margin: 0 auto;
+            text-align: center;
+            padding: 24px 0;
+            img {
+              width: 140px;
+            }
+            p {
+              margin: 5px 0;
+            }
+            h3 {
+              font-size: 18px;
+            }
           }
         }
       }
+      .col {
+        padding: 0;
+        border: 1px solid #f0f0f0;
+      }
     }
-    .two-grid-category {
+
+    .one-grid-category {
+      background: #fff;
+      width: 100%;
+      height: auto;
+      padding: 15px 0 0px;
+      //margin-bottom: 23px;
+
+      .vewall_area {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0px;
+        padding: 19px 16px 0;
+        text-transform: capitalize;
+        p {
+          font-size: 14px;
+          margin-top: 3px;
+          color: #878787;
+          margin-bottom: 0px;
+        }
+        h1 {
+          font-size: 15px;
+          color: #fff;
+        }
+      }
+      button {
+        background: #2ca032;
+        color: white;
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+        text-transform: capitalize;
+        box-shadow: none;
+      }
+      .productarea {
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0 1px 1.5px 0px rgba(0, 0, 0, 0.16);
+        transform: translate(0, 8px);
+        .col {
+          border: 1px solid #f0f0f0 !important;
+          padding: 0;
+
+          .productcontent {
+            text-align: center;
+            padding-top: 7px;
+            padding-bottom: 5px;
+            span {
+              font-size: 13px;
+              color: #262626;
+              line-height: 16px;
+              margin-top: 8px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+              overflow: hidden;
+              text-align: center;
+            }
+            p {
+              font-size: 14px;
+              color: #388e3c;
+              line-height: 24px;
+              margin-top: 0px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+              overflow: hidden;
+              text-align: center;
+              margin-bottom: 0px;
+            }
+          }
+          .productimage {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 24px 0;
+            img {
+              width: 140px;
+            }
+            p {
+              margin: 5px 0;
+            }
+            h3 {
+              font-size: 18px;
+            }
+          }
+        }
+      }
       .col {
         padding: 0;
         border: 1px solid #f0f0f0;
