@@ -7,9 +7,20 @@
       <img src="assets/imgs/FASTCON.png" style="width: 100px; height: 36px" />
     </ion-title>
     <ion-buttons end>
-      <button mode="md" ion-button clear icon-only (click)="showSearch()">
+      <!-- <button mode="md" ion-button clear icon-only (click)="showSearch()">
         <ion-icon name="md-search"></ion-icon>
+      </button> -->
+
+      <button
+        mode="md"
+        ion-button
+        clear
+        icon-only
+        (click)="goTo('NotificationPage')"
+      >
+        <ion-icon name="ios-notifications-outline"></ion-icon>
       </button>
+
       <button mode="md" ion-button icon-only (click)="goTo('WishlistPage')">
         <ion-badge *ngIf="wishlist.total && wishlist.total > 0"
           >{{wishlist.total}}</ion-badge
@@ -24,6 +35,16 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+
+  <ion-searchbar
+    style="background-color: var(--primary_color); margin-top: -5px"
+    (click)="showSearch()"
+    autocomplete
+    mode="ios"
+    #searchBar
+    [placeholder]="'SEARCH' | translate"
+  >
+  </ion-searchbar>
 </ion-header>
 
 <ion-content no-padding>
@@ -742,7 +763,6 @@
           [style.backgroundImage]="'url(' + section.bg_img + ')'"
           style="background-repeat: no-repeat"
         >
-          <!-- <img [src]="section.bg_img" /> -->
           <div class="vewall_area">
             <h1 [ngStyle]="{'color':section.title_color}">
               {{section.title}}<br />

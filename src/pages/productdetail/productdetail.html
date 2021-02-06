@@ -40,12 +40,22 @@
   <ng-container *ngIf="product">
     <ion-slides #slider pager class="header-image" [dir]="dir">
       <ion-slide *ngFor="let x of product.extraImages">
-        <img-loader [src]="x.src" (click)="zoomImage(x.src,x.name)" useImg>
+        <img-loader
+          [src]="x.src"
+          (click)="goTo('ImageGalleryPage',product)"
+          useImg
+        >
+          <!-- <img-loader [src]="x.src" (click)="zoomImage(x.src,'')" useImg> -->
         </img-loader>
       </ion-slide>
       <ng-container *ngFor="let x of product.images;let i=index">
         <ion-slide *ngIf="i>0 || product.extraImages.length==0">
-          <img-loader [src]="x.src" (click)="zoomImage(x.src,x.name)" useImg>
+          <img-loader
+            [src]="x.src"
+            (click)="goTo('ImageGalleryPage',product)"
+            useImg
+          >
+            <!-- <img-loader [src]="x.src" (click)="zoomImage(x.src,'')" useImg> -->
           </img-loader>
         </ion-slide>
       </ng-container>
@@ -198,11 +208,16 @@
                   tappable
                   (tap)="onVariationChange(attribute.slug,option)"
                 >
-                  <img [src]="option.src[0]" class="swatches" />
-                  <!-- <span
-                      class="swatches"
-                      [ngStyle]="{'background-color':option.value}"
-                    ></span> -->
+                  <img
+                    *ngIf="option.src[0] != ''"
+                    [src]="option.src[0]"
+                    class="swatches"
+                  />
+                  <span
+                    *ngIf="option.src[0] == ''"
+                    class="swatches"
+                    [ngStyle]="{'background-color':option.value}"
+                  ></span>
                 </div>
               </ng-container>
             </ng-container>
@@ -221,7 +236,7 @@
             <ng-container *ngSwitchDefault>
               <div style="display: flex">
                 <p style="font-weight: 700; margin-right: 8px">Size :</p>
-                <p>{{size}}</p>
+                <p style="text-transform: uppercase">{{size}}</p>
               </div>
               <ng-container *ngFor="let option of attribute.value">
                 <div
@@ -231,7 +246,7 @@
                   tappable
                   (tap)="onVariationChange(attribute.slug,option)"
                 >
-                  <span class="swatches"
+                  <span class="swatches" style="text-transform: uppercase"
                     >{{option.value||option.name||option}}</span
                   >
                 </div>

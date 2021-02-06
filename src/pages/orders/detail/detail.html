@@ -83,7 +83,7 @@
     </ion-list>
   </div>
 
-  <div class="order-details" padding-left padding-right>
+  <div class="order-details" *ngIf="check" padding-left padding-right>
     <ion-list no-lines>
       <ion-list-header no-padding no-lines no-margin>
         Order Track
@@ -96,6 +96,48 @@
           <li [class]="page=='shipped'?'is-active':''">Shipped</li>
           <li [class]="page=='delivered'?'is-active':''">Delivered</li>
         </ul>
+      </div>
+    </ion-list>
+  </div>
+
+  <div
+    class="order-details"
+    padding-left
+    padding-right
+    *ngIf="details !='' && details.phoe_wc_manual_ship_enable "
+  >
+    <ion-list no-lines>
+      <ion-list-header no-padding no-lines no-margin>
+        Click The Link To Track The Order
+      </ion-list-header>
+      <div>
+        <!-- <ion-item no-padding>
+          Tracking Number
+          <span item-end>
+            {{details.phoe_wc_manual_ship_tracking_number}}
+          </span>
+        </ion-item>
+        <ion-item no-padding>
+          Name
+          <span item-end> {{details.phoe_wc_manual_ship_provider_name}} </span>
+        </ion-item> -->
+        <ion-item no-padding>
+          Link
+          <span item-end>
+            <button
+              ion-button
+              icon-only
+              color="dark"
+              clear
+              tappable
+              (click)="customTrackOrder(details.phoe_wc_manual_ship_tracking_link)"
+            >
+              <p style="text-transform: lowercase">
+                {{details.phoe_wc_manual_ship_tracking_link}}
+              </p>
+            </button></span
+          >
+        </ion-item>
       </div>
     </ion-list>
   </div>

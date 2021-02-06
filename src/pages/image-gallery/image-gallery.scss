@@ -1,0 +1,12 @@
+page-image-gallery {
+  ion-slides.header-image {
+    .slide-zoom {
+      img {
+        width: 100% !important;
+      }
+    }
+  }
+  ion-slides {
+    height: auto;
+  }
+}

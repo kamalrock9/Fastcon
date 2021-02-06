@@ -304,4 +304,9 @@ export class WooCommerceProvider {
       this.RestURL + "order/track/delivery?order_id=" + order_id
     );
   }
+  getCustomOrderTrackData(order_id) {
+    return this.http.get(
+      this.RestURL + "order/manual-tracking?order_id=" + order_id
+    );
+  }
 }

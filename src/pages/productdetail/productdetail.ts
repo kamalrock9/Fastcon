@@ -254,10 +254,13 @@ export class ProductdetailPage {
     if (x.image.src) {
       this.product.extraImages = [x.image];
     }
-    this.product.extraImages = [
-      ...this.product.extraImages,
-      ...x.woo_variation_gallery_images,
-    ];
+    let newArr = [];
+    for (let i = 0; i < x.woo_variation_gallery_images.length; i++) {
+      if (x.woo_variation_gallery_images[i].src != "") {
+        newArr.push(x.woo_variation_gallery_images[i]);
+      }
+    }
+    this.product.extraImages = [...this.product.extraImages, ...newArr];
     this.product.variationImages = [...x.woo_variation_gallery_images];
     this.slider.slideTo(0);
     this.product.variation_id = x.id;
@@ -284,6 +287,7 @@ export class ProductdetailPage {
     modal.present();
   }
   goTo(page, params) {
+    console.log(params);
     this.navCtrl.push(page, { params: params }, { animate: false });
   }
 
@@ -600,6 +604,6 @@ export class ProductdetailPage {
     }
   }
   zoomImage(src, name) {
-    this.photoViewer.show(src, name, { share: false });
+    //this.photoViewer.show(src, name, { share: false });
   }
 }

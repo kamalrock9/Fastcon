@@ -244,5 +244,6 @@
   "AMOUNT": "Amount",
   "REFER_EARN_DESC": "Invite your friends on {{ storeName }} and get {{amount_referrer}} as wallet credit. Your friend Will also get {{amount_earner}} as wallet credit.",
   "TOTAL_SALE_SAVING": "You save",
-  "REFFERAL_CODE": "Referral Code"
+  "REFFERAL_CODE": "Referral Code",
+  "TRACK_ORDER": "Are you want to track the order?"
 }
