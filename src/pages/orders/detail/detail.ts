@@ -108,32 +108,40 @@ export class OrderDetailPage {
   }
 
   customTrackOrder(link) {
-    this.translate.get(["TRACK_ORDER", "NO", "YES"]).subscribe((x) => {
-      this.alertCtrl
-        .create({
-          title: x.TRACK_ORDER,
-          message: link,
-          buttons: [
-            {
-              text: x.NO,
-            },
-            {
-              text: x.YES,
-              handler: () => {
-                this.loader.show();
-                let browser;
-                browser = this.iab.create(link, "_self", {
-                  location: "no",
-                  clearcache: "yes",
-                  clearsessioncache: "yes",
-                });
-                this.loader.dismiss();
-              },
-            },
-          ],
-        })
-        .present();
+    this.loader.show();
+    let browser;
+    browser = this.iab.create(link, "_self", {
+      location: "no",
+      clearcache: "yes",
+      clearsessioncache: "yes",
     });
+    this.loader.dismiss();
+    // this.translate.get(["TRACK_ORDER", "NO", "YES"]).subscribe((x) => {
+    //   this.alertCtrl
+    //     .create({
+    //       title: x.TRACK_ORDER,
+    //       message: "Yes,For track the order",
+    //       buttons: [
+    //         {
+    //           text: x.NO,
+    //         },
+    //         {
+    //           text: x.YES,
+    //           handler: () => {
+    //             this.loader.show();
+    //             let browser;
+    //             browser = this.iab.create(link, "_self", {
+    //               location: "no",
+    //               clearcache: "yes",
+    //               clearsessioncache: "yes",
+    //             });
+    //             this.loader.dismiss();
+    //           },
+    //         },
+    //       ],
+    //     })
+    //     .present();
+    // });
   }
 
   ionViewDidLoad() {
