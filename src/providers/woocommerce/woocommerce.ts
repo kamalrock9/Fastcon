@@ -183,7 +183,8 @@ export class WooCommerceProvider {
   }
   getOrders(id: number, page: number, per_page: number) {
     let p = page ? "&page=" + page : "";
-    let pp = per_page ? "&per_page=" + per_page : "&per_page=10";
+    let pp = per_page ? "&per_page=" + per_page : "&per_page=5";
+    console.log(id);
     return this.WooCommerce.get("orders?customer=" + id + p + pp).then(
       (data) => {
         return data.data;
@@ -308,5 +309,8 @@ export class WooCommerceProvider {
     return this.http.get(
       this.RestURL + "order/manual-tracking?order_id=" + order_id
     );
+  }
+  getImages(product_id) {
+    return this.http.get(this.RestURL + "product/image?id=" + product_id);
   }
 }

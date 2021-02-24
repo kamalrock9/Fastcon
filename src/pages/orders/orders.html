@@ -33,7 +33,7 @@
   </div>
   <button
     class="order_items"
-    *ngFor="let x of orders"
+    *ngFor="let x of newOrder"
     ion-item
     tappable
     (tap)="goTo('OrderDetailPage',x)"
@@ -53,7 +53,7 @@
       <ion-col col-4>
         <img-loader
           useImg
-          [src]="x.line_items[0].img_src ? x.line_items[0].img_src : ''"
+          [src]="x.line_items[0].data.src ? x.line_items[0].data.src : ''"
           item-start
           style="max-width: 90px"
         ></img-loader>

@@ -212,4 +212,13 @@ page-order-detail {
       }
     }
   }
+
+  .link {
+    text-transform: capitalize;
+    background: var(--primary_color);
+    color: #ffffff;
+    font-weight: 700;
+    padding: 16px;
+    border-radius: 18px;
+  }
 }

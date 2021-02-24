@@ -13,8 +13,10 @@
 <ion-content no-padding>
   <ion-slides #slider class="header-image" [dir]="dir">
     <ion-slide *ngFor="let x of product;let i=index">
+      <!-- <zoom-area> -->
       <img-loader [src]="x.src" (click)="zoomImage(x.src,'')" useImg>
       </img-loader>
+      <!-- </zoom-area> -->
     </ion-slide>
   </ion-slides>
 
